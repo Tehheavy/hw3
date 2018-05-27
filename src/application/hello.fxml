@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="Controller" prefHeight="244.9609375" prefWidth="400.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.Controller">
+  <!-- TODO Add Nodes -->
+  <children>
+    <TextArea id="Text" fx:id="helloTF" layoutX="47.0" layoutY="44.0" prefHeight="138.0" prefWidth="310.0" text="" wrapText="true" />
+    <Button fx:id="button" layoutX="47.0" layoutY="196.0" mnemonicParsing="false" onAction="#sayhello" prefHeight="22.0" prefWidth="109.0" text="Say Hello" />
+    <TextArea fx:id="counter" layoutX="248.0" layoutY="196.0" prefHeight="22.000099999997474" prefWidth="109.0001220703125" text="0" wrapText="true" />
+  </children>
+</AnchorPane>
