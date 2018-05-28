@@ -10,11 +10,23 @@ public class Main extends Application {
 	  // constructing our scene    
 	  URL url = getClass().getResource("LoginWindow.fxml"); 
 	  AnchorPane pane = FXMLLoader.load( url ); 
-	  Scene scene = new Scene( pane );       
+	  Scene scene = new Scene( pane );	
 	  // setting the stage  
 	  primaryStage.setScene( scene );  
 	  primaryStage.setTitle( "Hello World wapa-313313983;313207888;313313991;328737739" );   
-	  primaryStage.show();     
+	  primaryStage.show();  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	  }
   public static void main(String[] args)
   { 

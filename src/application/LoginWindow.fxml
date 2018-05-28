@@ -10,7 +10,7 @@
   <children>
     <Pane layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="200.0">
       <children>
-        <Button layoutX="72.0" layoutY="166.0" mnemonicParsing="false" text="Button" />
+        <Button fx:id="LoginButton" layoutX="72.0" layoutY="166.0" mnemonicParsing="false" onAction="#Login" text="Login" />
         <TextField fx:id="UsernameTB" layoutX="0.0" layoutY="55.0" prefWidth="200.0" />
         <TextField fx:id="PasswordTF" layoutX="0.0" layoutY="100.0" prefWidth="200.0" />
         <Label layoutX="72.0" layoutY="39.0" text="Username" />
