@@ -66,6 +66,18 @@ public class LoginWindowController {
 
     @FXML
     void RegisterClick(ActionEvent event) {
+    	try{
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterWindow.fxml"));
+        Parent root = (Parent) loader.load();
+        RegisterWindowController RegisterControl = loader.getController();
+        Stage stage = new Stage();
+        stage.setTitle("Register");
+        stage.setScene(new Scene(root));
+    	stage.show();
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
 
     }
 
