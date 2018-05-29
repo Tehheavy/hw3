@@ -41,7 +41,7 @@ public class LoginWindowController {
 
 //    	Stage stage = new Stage();
 //    	Pane myPane = null;
-//    	myPane = FXMLLoader.load(getClass().getResource("CustomerWindow.fxml"));
+//    	myPane = FXMLLoader.load(getClass().getResource("CustomerWindow.fxml")); // test
 //    	Scene scene=new Scene(myPane);
 //    	stage.setScene(scene);
 //    	stage.show();
