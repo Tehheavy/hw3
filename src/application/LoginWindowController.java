@@ -58,7 +58,7 @@ public class LoginWindowController {
     	catch(IOException e){
     		e.printStackTrace();
     	}
-    	Stage stage2 = (Stage) LoginButton	.getScene().getWindow();
+    	Stage stage2 = (Stage) LoginButton .getScene().getWindow();
     	stage2.close();
     }
 
