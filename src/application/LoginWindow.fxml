@@ -5,16 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.LoginWindowController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginWindowController">
   <!-- TODO Add Nodes -->
   <children>
     <Pane layoutX="0.0" layoutY="0.0" prefHeight="200.0" prefWidth="200.0">
       <children>
-        <Button fx:id="LoginButton" layoutX="72.0" layoutY="166.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+        <Button fx:id="LoginButton" layoutX="26.0" layoutY="161.0" mnemonicParsing="false" onAction="#Login" text="Login" />
         <TextField fx:id="UsernameTB" layoutX="0.0" layoutY="55.0" prefWidth="200.0" />
         <TextField fx:id="PasswordTF" layoutX="0.0" layoutY="100.0" prefWidth="200.0" />
         <Label layoutX="72.0" layoutY="39.0" text="Username" />
         <Label layoutX="72.0" layoutY="84.0" text="Password" />
+            <Button fx:id="RegisterButton" layoutX="122.0" layoutY="161.0" mnemonicParsing="false" onAction="#RegisterClick" text="Register" />
       </children>
     </Pane>
   </children>

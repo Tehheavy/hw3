@@ -1,44 +1,46 @@
+/**
+ * Sample Skeleton for 'LoginWindow.fxml' Controller Class
+ */
+
 package application;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 
 public class LoginWindowController {
 
-    @FXML
+    @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
-    @FXML
+    @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 
-    @FXML
-    private Button LoginButton;
+    @FXML // fx:id="RegisterButton"
+    private Button RegisterButton; // Value injected by FXMLLoader
+
+    @FXML // fx:id="UsernameTB"
+    private TextField UsernameTB; // Value injected by FXMLLoader
+
+    @FXML // fx:id="PasswordTF"
+    private TextField PasswordTF; // Value injected by FXMLLoader
+
+    @FXML // fx:id="LoginButton"
+    private Button LoginButton; // Value injected by FXMLLoader
 
     @FXML
-    private TextField PasswordTF;
-
-    @FXML
-    private TextField UsernameTB;
-
-
-    @FXML
-    void Login(ActionEvent event) throws IOException {
-
+    void Login(ActionEvent event) {
+    	if(UsernameTB.getText().isEmpty()||PasswordTF.getText().isEmpty())
+    		return;
 //    	Stage stage = new Stage();
 //    	Pane myPane = null;
 //    	myPane = FXMLLoader.load(getClass().getResource("CustomerWindow.fxml")); // test
@@ -63,14 +65,16 @@ public class LoginWindowController {
     }
 
     @FXML
-    void initialize() {
-        assert LoginButton != null : "fx:id=\"LoginButton\" was not injected: check your FXML file 'LoginWindow.fxml'.";
-        assert PasswordTF != null : "fx:id=\"PasswordTF\" was not injected: check your FXML file 'LoginWindow.fxml'.";
-        assert UsernameTB != null : "fx:id=\"UsernameTB\" was not injected: check your FXML file 'LoginWindow.fxml'.";
-
+    void RegisterClick(ActionEvent event) {
 
     }
 
+    @FXML // This method is called by the FXMLLoader when initialization is complete
+    void initialize() {
+        assert RegisterButton != null : "fx:id=\"RegisterButton\" was not injected: check your FXML file 'LoginWindow.fxml'.";
+        assert UsernameTB != null : "fx:id=\"UsernameTB\" was not injected: check your FXML file 'LoginWindow.fxml'.";
+        assert PasswordTF != null : "fx:id=\"PasswordTF\" was not injected: check your FXML file 'LoginWindow.fxml'.";
+        assert LoginButton != null : "fx:id=\"LoginButton\" was not injected: check your FXML file 'LoginWindow.fxml'.";
 
-
+    }
 }
