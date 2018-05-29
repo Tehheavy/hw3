@@ -4,11 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
-public class CustomerWindowController {
+public class CustomerWindowController  {
 
     @FXML
     private ResourceBundle resources;
@@ -35,6 +36,10 @@ public class CustomerWindowController {
 
     @FXML
     void SumbitComplaint(ActionEvent event) {
+    }
+    void SetAccountName(String rhs)
+    {
+    	LabelBox.setText("Welcome "+rhs);
     }
 
     @FXML
