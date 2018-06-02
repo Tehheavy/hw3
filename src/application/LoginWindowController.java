@@ -5,8 +5,11 @@
 package application;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,15 +42,36 @@ public class LoginWindowController {
 
     @FXML
     void Login(ActionEvent event) {
-    	if(UsernameTB.getText().isEmpty()||PasswordTF.getText().isEmpty())
-    		return;
-//    	Stage stage = new Stage();
-//    	Pane myPane = null;
-//    	myPane = FXMLLoader.load(getClass().getResource("CustomerWindow.fxml")); // test
-//    	Scene scene=new Scene(myPane);
-//    	stage.setScene(scene);
-//    	stage.show();
+    	//if(UsernameTB.getText().isEmpty()||PasswordTF.getText().isEmpty())
+    		//return;	
     	try{
+//    		int num;
+//    		String temp;
+//    		Socket mainSocket=new Socket("192.168.1.17",4138);
+//    		
+//    		Scanner recieved=new Scanner(mainSocket.getInputStream());
+//    		PrintStream stream=new PrintStream(mainSocket.getOutputStream());
+//    		stream.println("login");
+//    		temp=recieved.nextLine();
+//    		System.out.println(temp+" first message");
+//    		if(temp.compareTo("accepted")==0){
+//    			stream.println(UsernameTB.getText());
+//        		temp=recieved.nextLine();
+//        		System.out.println(temp+" second message");
+//        		if(temp.compareTo("accepted")!=0)
+//        			return;
+//    		}
+//    		else{
+//    			return;
+//    		}
+    		ClientClass client=new ClientClass("192.168.1.17","4138");
+    		System.out.println(client.sendmessage("1"));
+    		System.out.println(client.sendmessage("alex"));
+
+    			
+    		
+    		
+    		
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
         Parent root = (Parent) loader.load();
         CustomerWindowController CusControl = loader.getController();
@@ -59,6 +83,9 @@ public class LoginWindowController {
     	}
     	catch(IOException e){
     		e.printStackTrace();
+    	}
+    	catch(Exception e){
+    		System.out.println(e.getMessage());
     	}
     	Stage stage2 = (Stage) LoginButton .getScene().getWindow();
     	stage2.close();
