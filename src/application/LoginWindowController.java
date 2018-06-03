@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -22,8 +23,17 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginWindowController {
+	
 
-	ClientClass client;
+	public ClientClass client;
+	public LoginWindowController() {
+		try {
+			client=new ClientClass("192.168.1.17","4138");
+		} catch(Exception e){
+			System.out.println("Could Not Connect to server");
+		}
+	}
+
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -50,31 +60,14 @@ public class LoginWindowController {
     		String LoginID=UsernameTB.getText().toLowerCase();
     		String PasswordID=PasswordTF.getText().toLowerCase();
     	try{
-//    		int num;
-//    		String temp;
-//    		Socket mainSocket=new Socket("192.168.1.17",4138);
-//    		
-//    		Scanner recieved=new Scanner(mainSocket.getInputStream());
-//    		PrintStream stream=new PrintStream(mainSocket.getOutputStream());
-//    		stream.println("login");
-//    		temp=recieved.nextLine();
-//    		System.out.println(temp+" first message");
-//    		if(temp.compareTo("accepted")==0){
-//    			stream.println(UsernameTB.getText());
-//        		temp=recieved.nextLine();
-//        		System.out.println(temp+" second message");
-//        		if(temp.compareTo("accepted")!=0)
-//        			return;
-//    		}
-//    		else{
-//    			return;
-//    		}
-    		client=new ClientClass("11.1.4.79","4138");
+    		//192.168.1.17
+    		//11.1.4.79
     		System.out.println("login "+LoginID+" "+PasswordID);
-    		if(!client.sendmessage("login "+LoginID+" "+PasswordID).equals("acceptedlogin"))
+    		String recieved=client.sendmessage("login "+LoginID+" "+PasswordID);
+    		if(!recieved.equals("acceptedlogin"))
     		{
-    			System.out.println("login failed");
-    			client.CloseConnection();
+    			System.out.println("login failed, recieved: "+ recieved);
+    			//client.CloseConnection(); CHECK THIS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     			return;
     		}
 
@@ -110,6 +103,7 @@ public class LoginWindowController {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterWindow.fxml"));
         Parent root = (Parent) loader.load();
         RegisterWindowController RegisterControl = loader.getController();
+        RegisterControl.client=client;
         Stage stage = new Stage();
         stage.setTitle("Register");
         stage.setScene(new Scene(root));
