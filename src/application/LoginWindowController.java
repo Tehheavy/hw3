@@ -6,6 +6,7 @@ package application;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 
 public class LoginWindowController {
 
+	ClientClass client;
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -40,10 +42,13 @@ public class LoginWindowController {
     @FXML // fx:id="LoginButton"
     private Button LoginButton; // Value injected by FXMLLoader
 
+    
     @FXML
     void Login(ActionEvent event) {
-    	//if(UsernameTB.getText().isEmpty()||PasswordTF.getText().isEmpty())
-    		//return;	
+    	if(UsernameTB.getText().isEmpty()||PasswordTF.getText().isEmpty())
+    		return;
+    		String LoginID=UsernameTB.getText().toLowerCase();
+    		String PasswordID=PasswordTF.getText().toLowerCase();
     	try{
 //    		int num;
 //    		String temp;
@@ -64,9 +69,14 @@ public class LoginWindowController {
 //    		else{
 //    			return;
 //    		}
-    		ClientClass client=new ClientClass("192.168.1.17","4138");
-    		System.out.println(client.sendmessage("1"));
-    		System.out.println(client.sendmessage("alex"));
+    		client=new ClientClass("11.1.4.79","4138");
+    		System.out.println("login "+LoginID+" "+PasswordID);
+    		if(!client.sendmessage("login "+LoginID+" "+PasswordID).equals("acceptedlogin"))
+    		{
+    			System.out.println("login failed");
+    			client.CloseConnection();
+    			return;
+    		}
 
     			
     		
@@ -75,11 +85,14 @@ public class LoginWindowController {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
         Parent root = (Parent) loader.load();
         CustomerWindowController CusControl = loader.getController();
-        CusControl.SetAccountName(UsernameTB.getText());
+        CusControl.SetAccountName(LoginID);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle(UsernameTB.getText());
+        stage.setTitle(LoginID);
     	stage.show();
+    	}
+    	catch(ConnectException e){
+    		System.out.println("Could not connect to server exception");
     	}
     	catch(IOException e){
     		e.printStackTrace();
