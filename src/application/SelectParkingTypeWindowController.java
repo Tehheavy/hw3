@@ -65,7 +65,7 @@ public class SelectParkingTypeWindowController {
         	stage.show();
     		Stage stage2 = (Stage) OneTimeParkingButton .getScene().getWindow();
         	stage2.close();
-    		//gayboyyyy alex v1
+    		//test
         	}
         	catch(IOException e){
         		e.printStackTrace();
