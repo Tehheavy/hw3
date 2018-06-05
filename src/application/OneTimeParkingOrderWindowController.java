@@ -12,7 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class OneTimeParkingOrderWindowController {
-
+	String AccountID;
+	ClientClass client;
     @FXML
     private ResourceBundle resources;
 
@@ -60,6 +61,14 @@ public class OneTimeParkingOrderWindowController {
 
     }
 
+    public void setAccountID(String rhs)
+    {
+    	AccountID=rhs;
+    }
+    public void setClient(ClientClass rhs)
+    {
+    	client=rhs;
+    }
     @FXML
     void initialize() {
         assert ArrivalTimeMinuteBox != null : "fx:id=\"ArrivalTimeMinuteBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
