@@ -79,6 +79,8 @@ public class LoginWindowController {
         Parent root = (Parent) loader.load();
         CustomerWindowController CusControl = loader.getController();
         CusControl.SetAccountName(LoginID);
+        CusControl.setClient(client);
+        CusControl.setAccountID(LoginID);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle(LoginID);
