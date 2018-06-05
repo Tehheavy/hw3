@@ -1,10 +1,15 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 
 public class SelectParkingTypeWindowController {
@@ -48,6 +53,23 @@ public class SelectParkingTypeWindowController {
 
     @FXML
     void OneTimeParkingButtonClick(ActionEvent event) {
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("OneTimeParkingOrderWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            OneTimeParkingOrderWindowController RegisterControl = loader.getController();
+            RegisterControl.setClient(client);
+            RegisterControl.setAccountID(AccountID);
+            Stage stage = new Stage();
+            stage.setTitle("Order");
+            stage.setScene(new Scene(root));
+        	stage.show();
+    		Stage stage2 = (Stage) OneTimeParkingButton .getScene().getWindow();
+        	stage2.close();
+    		
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}
     }
 
     @FXML

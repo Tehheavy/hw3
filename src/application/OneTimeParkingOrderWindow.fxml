@@ -7,42 +7,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OneTimeParkingOrderWindowController">
   <!-- TODO Add Nodes -->
   <children>
     <Pane layoutX="0.0" layoutY="0.0" prefHeight="300.0" prefWidth="300.0">
       <children>
-        <GridPane layoutX="50.0" layoutY="34.0">
+        <GridPane layoutX="50.0" layoutY="14.0">
           <children>
             <Label text="ID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label text="CarID" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <SplitMenuButton mnemonicParsing="false" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </SplitMenuButton>
             <Label text="Requested mall" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label text="Arrival Date" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <SplitMenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="SplitMenuButton" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </SplitMenuButton>
-                  <SplitMenuButton alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="SplitMenuButton" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                     <GridPane.margin>
-                        <Insets left="65.0" />
-                     </GridPane.margin>
-                  </SplitMenuButton>
+                  <DatePicker fx:id="ArrivalDateBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Arrival Time" GridPane.rowIndex="4" />
                   <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
@@ -51,31 +27,29 @@
                   </Label>
                   <Label text="Leave Date" GridPane.rowIndex="5" />
                   <Label text="Leave Time" GridPane.rowIndex="6" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="LeaveDateBox" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="55.0" />
                      </GridPane.margin>
                   </Label>
-                  <SplitMenuButton alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="SplitMenuButton" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                     </items>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </SplitMenuButton>
-                  <SplitMenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="SplitMenuButton" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                     </items>
+                  <Label text="Mail" GridPane.rowIndex="7" />
+                  <TextField fx:id="CarIDTB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="IDTB" GridPane.columnIndex="1" />
+                  <TextField fx:id="EmailTB" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="RequestedMallMENU" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="ArrivalTimeHourBox" prefHeight="25.0" prefWidth="32.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="ArrivalTimeMinuteBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="65.0" />
                      </GridPane.margin>
-                  </SplitMenuButton>
-                  <Label text="Mail" GridPane.rowIndex="7" />
+                  </ComboBox>
+                  <ComboBox fx:id="LeaveTimeHourBox" prefHeight="25.0" prefWidth="38.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="LeaveTimeMinuteBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets left="65.0" />
+                     </GridPane.margin>
+                  </ComboBox>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="85.0" />
@@ -92,6 +66,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
+            <Button fx:id="OrderButton" layoutX="50.0" layoutY="261.0" mnemonicParsing="false" onAction="#OrderButtonClick" text="Order" />
+            <Label fx:id="PriceLabel" layoutX="190.0" layoutY="265.0" text="Price:" />
       </children>
     </Pane>
   </children>
