@@ -59,6 +59,7 @@ public class SelectParkingTypeWindowController {
             OneTimeParkingOrderWindowController RegisterControl = loader.getController();
             RegisterControl.setClient(client);
             RegisterControl.setAccountID(AccountID);
+            RegisterControl.Load();
             Stage stage = new Stage();
             stage.setTitle("Order");
             stage.setScene(new Scene(root));

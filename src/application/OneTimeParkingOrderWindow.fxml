@@ -12,7 +12,7 @@
   <children>
     <Pane layoutX="0.0" layoutY="0.0" prefHeight="300.0" prefWidth="300.0">
       <children>
-        <GridPane layoutX="50.0" layoutY="14.0">
+        <GridPane layoutX="50.0" layoutY="11.0" prefHeight="243.0" prefWidth="220.0">
           <children>
             <Label text="ID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label text="CarID" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -22,7 +22,7 @@
                   <Label text="Arrival Time" GridPane.rowIndex="4" />
                   <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
-                        <Insets left="55.0" />
+                        <Insets left="60.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Leave Date" GridPane.rowIndex="5" />
@@ -30,7 +30,7 @@
                   <DatePicker fx:id="LeaveDateBox" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
-                        <Insets left="55.0" />
+                        <Insets left="60.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Mail" GridPane.rowIndex="7" />
@@ -38,13 +38,13 @@
                   <TextField fx:id="IDTB" GridPane.columnIndex="1" />
                   <TextField fx:id="EmailTB" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <ComboBox fx:id="RequestedMallMENU" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="ArrivalTimeHourBox" prefHeight="25.0" prefWidth="32.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="ArrivalTimeHourBox" prefHeight="25.0" prefWidth="57.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <ComboBox fx:id="ArrivalTimeMinuteBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="65.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <ComboBox fx:id="LeaveTimeHourBox" prefHeight="25.0" prefWidth="38.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="LeaveTimeHourBox" prefHeight="25.0" prefWidth="57.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ComboBox fx:id="LeaveTimeMinuteBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="65.0" />
@@ -53,7 +53,7 @@
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="85.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="125.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
