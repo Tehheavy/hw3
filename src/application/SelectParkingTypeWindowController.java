@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 
 
 public class SelectParkingTypeWindowController {
+	//1 Casual Parking Order 
+	//2 One Time Parking Order
+	//3 Routine Subscription Order
+	//4 Full Subscription Order
 
 	String AccountID;
 	ClientClass client;
