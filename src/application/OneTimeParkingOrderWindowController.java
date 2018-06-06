@@ -188,47 +188,31 @@ public class OneTimeParkingOrderWindowController {
 			        	EmailTB.getText());
     	// everything after this is =>  the data was entered correctly
     	
+    	
+    	try{
+			//192.168.1.17
+			//11.1.4.79
 
-    	try {
-			System.out.println(client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
-						" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
-						ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
-						LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
-						EmailTB.getText()));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if(!client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
+					" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
+					ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
+					LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
+					EmailTB.getText()).equals("acceptedorder"))
+			{
+				System.out.println("order failed");
+				CreatePopupWindow popup = new CreatePopupWindow("order Failed");
+				
+				return;
+			}
+			CreatePopupWindow popup = new CreatePopupWindow("Order Successful");
+			
+			
+
 		}
-    	
-    	
-    	
-//    	try{
-//			//192.168.1.17
-//			//11.1.4.79
-//
-//			if(!client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
-//					" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
-//					ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
-//					LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
-//					EmailTB.getText()).equals("acceptedorder"))
-//			{
-//				System.out.println("order failed");
-//				CreatePopupWindow popup = new CreatePopupWindow("order Failed");
-//				
-//				return;
-//			}
-//			CreatePopupWindow popup = new CreatePopupWindow("Order Successful");
-//			
-//			
-//
-//		}
-//		catch(Exception e)
-//		{
-//			System.out.println("Order failed");
-//		}
+		catch(Exception e)
+		{
+			System.out.println("Order failed");
+		}
     	return;
     }
 
