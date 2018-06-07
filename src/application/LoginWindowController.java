@@ -28,7 +28,7 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("192.168.1.17","4138");
+			client=new ClientClass("11.1.0.222","4138");
 		} catch(Exception e){
 			System.out.println("Could Not Connect to server");
 		}
