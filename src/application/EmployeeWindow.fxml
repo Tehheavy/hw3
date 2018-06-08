@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="168.0" prefWidth="328.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.EmployeeWindowController">
+<AnchorPane prefHeight="168.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeWindowController">
   <!-- TODO Add Nodes -->
   <children>
     <GridPane prefHeight="168.0" prefWidth="328.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
           <menus>
+                  <Menu mnemonicParsing="false" text="&lt;Employe name&gt;">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Change user" />
+                        <MenuItem mnemonicParsing="false" text="Exit" />
+                     </items>
+                  </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
                 <MenuItem mnemonicParsing="false" text="Edit prices" />
@@ -19,7 +26,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Show">
               <items>
-                <MenuItem mnemonicParsing="false" text="Delete" />
+                <MenuItem mnemonicParsing="false" text="Customer Complaints..." />
+                        <MenuItem mnemonicParsing="false" text="My parking spots" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
