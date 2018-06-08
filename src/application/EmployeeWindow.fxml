@@ -20,6 +20,18 @@
                         <MenuItem fx:id="ExitMenuItem" mnemonicParsing="false" text="Exit" />
                      </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="Order...">
+                    <items>
+                      <MenuItem fx:id="OrderCasualParkingMenuItem" mnemonicParsing="false" onAction="#OrderCasualParkingMenuItemClick" text="Casual Parking" />
+                        <MenuItem fx:id="OrderOneTimeParkingMenuItem" mnemonicParsing="false" onAction="#OrderOneTimeParkingMenuItemClick" text="One Time Parking" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Subscribe...">
+                    <items>
+                        <MenuItem fx:id="RoutineSubscriptionMenuItem" mnemonicParsing="false" onAction="#RoutineSubscriptionMenuItemClick" text="Routine Subscription" />
+                        <MenuItem fx:id="FullTimeSubscriptionMenuItem" mnemonicParsing="false" onAction="#FullTimeSubscriptionMenuItemClick" text="Full-Time Subscription" />
+                    </items>
+                  </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
                 <MenuItem fx:id="EditPricesMenuItem" mnemonicParsing="false" text="Edit prices" />

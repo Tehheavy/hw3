@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -47,7 +48,7 @@ public class LoginWindowController {
     private TextField UsernameTB; // Value injected by FXMLLoader
 
     @FXML // fx:id="PasswordTF"
-    private TextField PasswordTF; // Value injected by FXMLLoader
+    private PasswordField PasswordTF; // Value injected by FXMLLoader
 
     @FXML // fx:id="LoginButton"
     private Button LoginButton; // Value injected by FXMLLoader
