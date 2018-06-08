@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,7 +29,7 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("11.1.0.222","4138");
+			client=new ClientClass("192.168.1.128","4138");
 		} catch(Exception e){
 			System.out.println("Could Not Connect to server");
 		}
@@ -47,7 +48,7 @@ public class LoginWindowController {
     private TextField UsernameTB; // Value injected by FXMLLoader
 
     @FXML // fx:id="PasswordTF"
-    private TextField PasswordTF; // Value injected by FXMLLoader
+    private PasswordField PasswordTF; // Value injected by FXMLLoader
 
     @FXML // fx:id="LoginButton"
     private Button LoginButton; // Value injected by FXMLLoader
@@ -64,7 +65,8 @@ public class LoginWindowController {
     		//11.1.4.79
     		System.out.println("login "+LoginID+" "+PasswordID);
     		String recieved=client.sendmessage("login "+LoginID+" "+PasswordID);
-    		if(!recieved.equals("acceptedlogin"))
+    		System.out.println("recieved:"+recieved);
+    		if(recieved.equals("0"))
     		{
     			System.out.println("login failed, recieved: "+ recieved);
     			//client.CloseConnection(); CHECK THIS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -72,19 +74,32 @@ public class LoginWindowController {
     		}
 
     			
-    		
-    		
-    		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
-        Parent root = (Parent) loader.load();
-        CustomerWindowController CusControl = loader.getController();
-        CusControl.SetAccountName(LoginID);
-        CusControl.setClient(client);
-        CusControl.setAccountID(LoginID);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle(LoginID);
-    	stage.show();
+    		if(recieved.equals("1")){	
+		    	FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
+		        Parent root = (Parent) loader.load();
+		        CustomerWindowController CusControl = loader.getController();
+		        CusControl.SetAccountName(LoginID);
+		        CusControl.setClient(client);
+		        CusControl.setAccountID(LoginID);
+		        Stage stage = new Stage();
+		        stage.setScene(new Scene(root));
+		        stage.setTitle(LoginID);
+		    	stage.show();
+    		}
+    		else if(recieved.equals("2")){
+    			FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWindow.fxml"));
+		        Parent root = (Parent) loader.load();
+		        EmployeeWindowController CusControl = loader.getController();
+		        CusControl.SetAccountName(LoginID);
+		        System.out.println("asddassad");
+		        CusControl.setClient(client);
+		        CusControl.setAccountID(LoginID);
+		        CusControl.load("2");
+		        Stage stage = new Stage();
+		        stage.setScene(new Scene(root));
+		        stage.setTitle(LoginID);
+		    	stage.show();
+    		}
     	}
     	catch(ConnectException e){
     		System.out.println("Could not connect to server exception");

@@ -1,50 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="168.0" prefWidth="328.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.EmployeeWindowController">
+<AnchorPane prefHeight="324.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeWindowController">
   <!-- TODO Add Nodes -->
   <children>
-    <GridPane prefHeight="168.0" prefWidth="328.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
-        <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+      <VBox prefHeight="324.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+        <MenuBar>
           <menus>
+                  <Menu fx:id="NameMenuBar" mnemonicParsing="false" text="&lt;Employe name&gt;">
+                     <items>
+                        <MenuItem fx:id="ChangeUserMenuItem" mnemonicParsing="false" text="Change user" />
+                        <MenuItem fx:id="ExitMenuItem" mnemonicParsing="false" text="Exit" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Order...">
+                    <items>
+                      <MenuItem fx:id="OrderCasualParkingMenuItem" mnemonicParsing="false" onAction="#OrderCasualParkingMenuItemClick" text="Casual Parking" />
+                        <MenuItem fx:id="OrderOneTimeParkingMenuItem" mnemonicParsing="false" onAction="#OrderOneTimeParkingMenuItemClick" text="One Time Parking" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Subscribe...">
+                    <items>
+                        <MenuItem fx:id="RoutineSubscriptionMenuItem" mnemonicParsing="false" onAction="#RoutineSubscriptionMenuItemClick" text="Routine Subscription" />
+                        <MenuItem fx:id="FullTimeSubscriptionMenuItem" mnemonicParsing="false" onAction="#FullTimeSubscriptionMenuItemClick" text="Full-Time Subscription" />
+                    </items>
+                  </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
-                <MenuItem mnemonicParsing="false" text="Edit prices" />
+                <MenuItem fx:id="EditPricesMenuItem" mnemonicParsing="false" text="Edit prices" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Show">
               <items>
-                <MenuItem mnemonicParsing="false" text="Delete" />
+                <MenuItem fx:id="CustomerComplainsMenuItem" mnemonicParsing="false" text="Customer Complaints..." />
+                        <MenuItem fx:id="ParkingSpotsMenuItem" mnemonicParsing="false" text="My parking spots" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
                 <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="File a complaint." />
               </items>
             </Menu>
           </menus>
         </MenuBar>
-        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
-          <children>
-            <Label text="Greetins Employee number #&lt;id&gt;" StackPane.alignment="TOP_CENTER" />
-            <Label text="BUTTONS:" StackPane.alignment="BOTTOM_CENTER" />
-          </children>
-        </StackPane>
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
+          <GridPane prefHeight="286.0" prefWidth="423.0" style="-fx-background-color: #D3D3D3;">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="292.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="131.0" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="VehicleEnterButton" mnemonicParsing="false" onAction="#VehicleEnterMethod" text="הכנסת רכב" />
+                        <Region prefHeight="40.0" prefWidth="80.0" />
+                        <Button fx:id="VehicleLeaveButton" mnemonicParsing="false" onAction="#VehicleLeaveMethod" text="הוצאת רכב" />
+                        <Region prefHeight="41.0" prefWidth="70.0" />
+                        <Button fx:id="ParkingCancelButton" mnemonicParsing="false" onAction="#ParkingCancelMethod" text="ביטול חנייה" />
+                     </children>
+                  </VBox>
+                  <Label prefHeight="61.0" prefWidth="192.0" text="ADD CUR STORED VEHICLES THEIR TIME AND STUFF HER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </children>
+          </GridPane>
+         </children>
+      </VBox>
   </children>
 </AnchorPane>
