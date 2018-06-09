@@ -29,7 +29,7 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("192.168.1.128","4138");
+			client=new ClientClass("192.168.1.17","4138");
 		} catch(Exception e){
 			System.out.println("Could Not Connect to server");
 		}
@@ -75,12 +75,15 @@ public class LoginWindowController {
 
     			
     		if(recieved.equals("1")){	
-		    	FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
+    			FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWindow.fxml"));
+		    //FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
 		        Parent root = (Parent) loader.load();
-		        CustomerWindowController CusControl = loader.getController();
+		     //  CustomerWindowController CusControl = loader.getController();
+		        EmployeeWindowController CusControl = loader.getController();
 		        CusControl.SetAccountName(LoginID);
 		        CusControl.setClient(client);
 		        CusControl.setAccountID(LoginID);
+		        CusControl.load("1");
 		        Stage stage = new Stage();
 		        stage.setScene(new Scene(root));
 		        stage.setTitle(LoginID);

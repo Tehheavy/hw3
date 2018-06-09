@@ -153,6 +153,11 @@ public class EmployeeWindowController {
 			this.NameMenuBar.setText(rhs);
 	}
 	void load(String acctype){
+		if(acctype.equals("1"))
+		{
+			CustomerComplainsMenuItem.setVisible(false);
+			EditPricesMenuItem.setVisible(false);
+		}
 		if(acctype.equals("2")){
 			//    		VehicleEnterButton.setVisible(false);
 			//    		NameMenuBar.hide();

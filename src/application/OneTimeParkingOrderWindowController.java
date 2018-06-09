@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -88,11 +89,23 @@ public class OneTimeParkingOrderWindowController {
      		   "40","41","42","43","44","45","46","47","48","49",
      		   "50","51","52","53","54","55","56","57","58","59"
     		);
-    	RequestedMallMENU.getItems().addAll(
-    		    "Kenyon-8",
-    		    "Kenyon-nehemia",
-    		    "Watermelon-mall"
-    		);
+    	try {
+			String malls=client.sendmessage("request malls");
+			System.out.println("Requested malls: "+malls);
+			String[] split = malls.split(" ");
+			ArrayList<String> MallList=new ArrayList<String>();
+			for(int i=1;i<split.length;i++)
+			{
+				MallList.add(split[i]);
+			}
+			RequestedMallMENU.getItems().addAll(MallList);
+			String prices=client.sendmessage("request price 2");
+			split = prices.split(" ");
+			PriceLabel.setText("Price: "+split[1]+"$/h");
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     }
     public boolean isValidEmailAddress(String email) {
@@ -101,6 +114,7 @@ public class OneTimeParkingOrderWindowController {
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
  }
+    
 
     @FXML
     void OrderButtonClick(ActionEvent event) {
