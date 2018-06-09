@@ -29,7 +29,7 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("192.168.1.128","4138");
+			client=new ClientClass("192.168.1.11","4138");
 		} catch(Exception e){
 			System.out.println("Could Not Connect to server");
 		}
@@ -64,6 +64,7 @@ public class LoginWindowController {
     		//192.168.1.17
     		//11.1.4.79
     		System.out.println("login "+LoginID+" "+PasswordID);
+    		// send to server
     		String recieved=client.sendmessage("login "+LoginID+" "+PasswordID);
     		System.out.println("recieved:"+recieved);
     		if(recieved.equals("0"))
