@@ -29,7 +29,7 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("192.168.1.17","4138");
+			client=new ClientClass("192.168.1.128","4138");
 		} catch(Exception e){
 			System.out.println("Could Not Connect to server");
 		}
@@ -143,4 +143,5 @@ public class LoginWindowController {
         assert LoginButton != null : "fx:id=\"LoginButton\" was not injected: check your FXML file 'LoginWindow.fxml'.";
 
     }
+    
 }

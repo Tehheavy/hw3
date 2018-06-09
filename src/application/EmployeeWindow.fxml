@@ -46,7 +46,7 @@
             <Menu mnemonicParsing="false" text="Help">
               <items>
                 <MenuItem mnemonicParsing="false" text="About" />
-                        <MenuItem mnemonicParsing="false" text="File a complaint." />
+                        <MenuItem fx:id="FileAComplaintMenuItem" mnemonicParsing="false" onAction="#FileAComplaintMenuItemClick" text="File a complaint." />
               </items>
             </Menu>
           </menus>
