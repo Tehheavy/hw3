@@ -34,6 +34,7 @@ public class ComplaintWindowController {
     @FXML
     void sendButton(ActionEvent event) {
     	Stage stage2 = (Stage) SendComplaintButton .getScene().getWindow();
+    	System.out.println("test");
     	stage2.close();
     }
 
