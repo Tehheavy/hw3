@@ -79,9 +79,9 @@ public class EmployeeWindowController {
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("MyComplaintsWindow.fxml"));
             Parent root = (Parent) loader.load();
             MyComplaintsWindowController MyComplaints = loader.getController();
-//            RegisterControl.setClient(client);
-//            RegisterControl.setAccountID(AccountID);
-//            RegisterControl.Load();
+            MyComplaints.setClient(client);
+            MyComplaints.setAccountID(AccountID);
+            MyComplaints.Load();
             Stage stage = new Stage();
             stage.setTitle("My Complaints");
             stage.setScene(new Scene(root));

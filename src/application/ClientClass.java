@@ -6,6 +6,8 @@ import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class ClientClass {
 
@@ -33,6 +35,18 @@ public class ClientClass {
 	  return str;
 	  
 	 }
+	 
+	 public ArrayList<ComplaintHolder> sendmessage2(String message) throws IOException, ClassNotFoundException{
+		  out.println(message);
+		  out.flush();
+		  ArrayList<ComplaintHolder> str=null;
+		  Object obj;
+		  obj=in.readObject();
+		  str=(ArrayList<ComplaintHolder>)obj;
+		  return str;
+		  
+		 }
+	 
 	 public void CloseConnection() throws IOException{
 	  clientsocket.close();
 	 }

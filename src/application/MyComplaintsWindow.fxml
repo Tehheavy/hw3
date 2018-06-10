@@ -7,13 +7,15 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MyComplaintsWindowController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="300.0">
+      <Pane prefHeight="400.0" prefWidth="500.0">
          <children>
-            <TableView layoutX="25.0" layoutY="44.0" prefHeight="300.0" prefWidth="250.0">
+            <TableView fx:id="ComplaintsTable" layoutX="25.0" layoutY="44.0" prefHeight="300.0" prefWidth="450.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="user" />
-                <TableColumn prefWidth="113.0" text="complaint" />
-                  <TableColumn prefWidth="61.0" text="status" />
+                  <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+                <TableColumn fx:id="complaintColumn" prefWidth="113.0" text="complaint" />
+                <TableColumn fx:id="dateColumn" prefWidth="75.0" text="user" />
+                  <TableColumn fx:id="responseColumn" prefWidth="75.0" text="response" />
+                  <TableColumn fx:id="statusColumn" prefWidth="61.0" text="status" />
               </columns>
             </TableView>
          </children>
