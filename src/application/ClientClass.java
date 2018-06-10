@@ -40,10 +40,9 @@ public class ClientClass {
 		  out.println(message);
 		  out.flush();
 		  ArrayList<ComplaintHolder> str=null;
-		  Object obj;
-		  obj=in.readObject();
-		  str=(ArrayList<ComplaintHolder>)obj;
-		  return str;
+		  ArrayList<ComplaintHolder> obj;
+		  obj=(ArrayList<ComplaintHolder>)in.readObject();
+		  return obj;
 		  
 		 }
 	 

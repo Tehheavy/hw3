@@ -9,9 +9,11 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MyComplaintsWindowController {
@@ -31,6 +33,12 @@ public class MyComplaintsWindowController {
 
     @FXML
     private TableView<Complaint> ComplaintsTable;
+
+    @FXML
+    private TextArea ResponseBox;
+
+    @FXML
+    private TextArea CustomerComplaintBox;
 
     @FXML
     private TableColumn<Complaint, String> dateColumn;
@@ -86,10 +94,12 @@ public class MyComplaintsWindowController {
 
     @FXML
     void initialize() {
+        assert ResponseBox != null : "fx:id=\"ResponseBox\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert statusColumn != null : "fx:id=\"statusColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert responseColumn != null : "fx:id=\"responseColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
+        assert CustomerComplaintBox != null : "fx:id=\"CustomerComplaintBox\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
+        assert dateColumn != null : "fx:id=\"dateColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert ComplaintsTable != null : "fx:id=\"ComplaintsTable\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
-        assert dateColumn != null : "fx:id=\"userColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert complaintColumn != null : "fx:id=\"complaintColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert idColumn != null : "fx:id=\"idColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
 
