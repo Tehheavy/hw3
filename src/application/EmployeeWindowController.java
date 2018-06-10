@@ -67,6 +67,32 @@ public class EmployeeWindowController {
     @FXML // fx:id="FileAComplaintMenuItem"
     private MenuItem FileAComplaintMenuItem; // Value injected by FXMLLoader
 
+    @FXML // fx:id="EditMenu"
+    private Menu EditMenu; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="MyComplaintsMenuItem"
+    private MenuItem MyComplaintsMenuItem; // Value injected by FXMLLoader
+    
+    @FXML
+    void MyComplaintsMenuItemClick(ActionEvent event) {
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("MyComplaintsWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            MyComplaintsWindowController MyComplaints = loader.getController();
+//            RegisterControl.setClient(client);
+//            RegisterControl.setAccountID(AccountID);
+//            RegisterControl.Load();
+            Stage stage = new Stage();
+            stage.setTitle("My Complaints");
+            stage.setScene(new Scene(root));
+        	stage.show();
+//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+//        	stage2.close();
+    		//test
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}    }
     @FXML
     void OrderCasualParkingMenuItemClick(ActionEvent event) {
 
@@ -176,7 +202,7 @@ public class EmployeeWindowController {
 		if(acctype.equals("1"))
 		{
 			CustomerComplainsMenuItem.setVisible(false);
-			EditPricesMenuItem.setVisible(false);
+			EditMenu.setVisible(false);
 		}
 		if(acctype.equals("2")){
 			//    		VehicleEnterButton.setVisible(false);

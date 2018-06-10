@@ -4,6 +4,7 @@
 
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,16 @@ public class ComplaintWindowController {
 
     @FXML
     void sendButton(ActionEvent event) {
+    	try {
+			System.out.println(client.sendmessage("complaint "+ AccountID+" "+ComplaintText.getText()));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//    	System.out.println(ComplaintText.getText());
     	Stage stage2 = (Stage) SendComplaintButton .getScene().getWindow();
     	stage2.close();
     }
