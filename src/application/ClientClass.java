@@ -36,12 +36,12 @@ public class ClientClass {
 	  
 	 }
 	 
-	 public ArrayList<ComplaintHolder> sendmessage2(String message) throws IOException, ClassNotFoundException{
+	 public String[][] sendmessage2(String message) throws IOException, ClassNotFoundException{
 		  out.println(message);
 		  out.flush();
-		  ArrayList<ComplaintHolder> str=null;
-		  ArrayList<ComplaintHolder> obj;
-		  obj=(ArrayList<ComplaintHolder>)in.readObject();
+		  String[][] str=null;
+		  String[][] obj;
+		  obj=(String[][])in.readObject();
 		  return obj;
 		  
 		 }
