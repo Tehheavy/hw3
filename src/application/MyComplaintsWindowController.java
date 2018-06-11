@@ -102,6 +102,12 @@ public class MyComplaintsWindowController {
         assert ComplaintsTable != null : "fx:id=\"ComplaintsTable\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert complaintColumn != null : "fx:id=\"complaintColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
         assert idColumn != null : "fx:id=\"idColumn\" was not injected: check your FXML file 'MyComplaintsWindow.fxml'.";
+        ComplaintsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                CustomerComplaintBox.setText(newSelection.getComplaint());
+                ResponseBox.setText(newSelection.getResponse());
+            }
+        });
 
     }
 }
