@@ -63,9 +63,18 @@ public class MyComplaintsWindowController {
     public void Load(){
     	data=FXCollections.observableArrayList();
     	String[][] rs=null;
+    	String[][] rs2=null;
     	try {
     		System.out.println("alex test");
     		rs=(String[][])client.sendmessage2("request "+"complaints"+" "+AccountID);
+    		rs2=(String[][])client.sendmessage2("request "+"allcomplaints");
+    		System.out.println("test");
+    		for(int i=0;i<rs2.length;i++){
+    			for(int j= 0;j<rs2[i].length;j++)
+    				System.out.print(rs2[i][j]);
+    			System.out.println();
+    		}
+
     		if(rs==null)
     		{
     			System.out.println("test alex banana");
@@ -73,10 +82,7 @@ public class MyComplaintsWindowController {
     		}
 			for(int i=0;i<rs.length;i++)
 			{
-			//	data.add((ComplaintHolder)rs.get(i));
-				//data.add(new Complaint(String.valueOf(rs.getInt(1)),rs.getString(3),rs.getTimestamp(4).toString(),rs.getString(5),String.valueOf(rs.getString(6))));
 				data.add(new Complaint(rs[i][0],rs[i][1],rs[i][2],rs[i][3],rs[i][4]));
-				//data.add(new Complaint("test","test","test","test","test"));
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
