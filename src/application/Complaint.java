@@ -7,10 +7,12 @@ public class Complaint {
 	
 	
 	private final StringProperty id;
+	private  StringProperty username;
 	private final StringProperty complaint;
 	private final StringProperty date;
 	private final StringProperty response;
 	private final StringProperty resolved;
+	private  StringProperty seen;
 	
 	/////////////////////////////////////////////////
 	public Complaint(String id, String complaint, String date, String response,
@@ -21,6 +23,17 @@ public class Complaint {
 		this.date = new SimpleStringProperty(date);
 		this.response = new SimpleStringProperty(response);
 		this.resolved = new SimpleStringProperty(resolved);
+	}
+	public Complaint(String id,String username, String complaint, String date, String response,
+			String resolved,String seen) {
+		super();
+		this.id = new SimpleStringProperty(id);
+		this.setUsername(new SimpleStringProperty(username));
+		this.complaint = new SimpleStringProperty(complaint);
+		this.date = new SimpleStringProperty(date);
+		this.response = new SimpleStringProperty(response);
+		this.resolved = new SimpleStringProperty(resolved);
+		this.setSeen(new SimpleStringProperty(seen));
 	}
 
 	public String getId() {
@@ -68,5 +81,17 @@ public class Complaint {
 	public StringProperty dateProperty(){return date;}
 	public StringProperty responseProperty(){return response;}
 	public StringProperty resolvedProperty(){return resolved;}
+	public StringProperty getSeen() {
+		return seen;
+	}
+	public void setSeen(StringProperty seen) {
+		this.seen = seen;
+	}
+	public StringProperty getUsername() {
+		return username;
+	}
+	public void setUsername(StringProperty username) {
+		this.username = username;
+	}
 
 }

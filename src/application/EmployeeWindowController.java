@@ -162,6 +162,25 @@ public class EmployeeWindowController {
     		e.printStackTrace();
     	}
     }
+    @FXML
+    void CustomerComplainsMenuItemClick(ActionEvent event) {
+    	try {
+	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("AllComplaintsWindow.fxml"));
+	        Parent root;
+				root = (Parent) loader.load();
+	        AllComplaintsWindowController CusControl = loader.getController();
+	        CusControl.setClient(client);
+	        CusControl.setAccountID(AccountID);
+	        CusControl.load();
+	        Stage stage = new Stage();
+	        stage.setScene(new Scene(root));
+	        stage.setTitle("Complaint Window");
+	    	stage.show();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    }
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert ParkingSpotsMenuItem != null : "fx:id=\"ParkingSpotsMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
