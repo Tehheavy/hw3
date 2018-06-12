@@ -24,10 +24,13 @@
             </MenuBar>
             <TableView fx:id="ComplaintsTable">
               <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="75.0" text="Username" />
-                  <TableColumn prefWidth="75.0" text="Date" />
-                  <TableColumn prefWidth="75.0" text="Complaint" />
+                <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
+                  <TableColumn fx:id="complaintColumn" prefWidth="75.0" text="Complaint" />
+                  <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="responseColumn" prefWidth="75.0" text="Response" />
+                  <TableColumn fx:id="resolvedColumn" prefWidth="75.0" text="Resolved" />
+                  <TableColumn fx:id="seenColumn" prefWidth="75.0" text="Seen" />
               </columns>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -43,7 +46,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </TextArea>
-                  <Button fx:id="SendButton" mnemonicParsing="false" onAction="#SendButtonClick" text="&gt;" HBox.hgrow="ALWAYS">
+                  <Button fx:id="SendButton" ellipsisString="&gt;" mnemonicParsing="false" onAction="#SendButtonClick" text="&gt;" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" right="10.0" top="10.0" />
                      </HBox.margin>

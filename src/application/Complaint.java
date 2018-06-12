@@ -81,17 +81,25 @@ public class Complaint {
 	public StringProperty dateProperty(){return date;}
 	public StringProperty responseProperty(){return response;}
 	public StringProperty resolvedProperty(){return resolved;}
-	public StringProperty getSeen() {
-		return seen;
+	public StringProperty usernameProperty(){return username;}
+	public StringProperty seenProperty(){return seen;}
+	public String getSeen() {
+		return seen.get();
 	}
 	public void setSeen(StringProperty seen) {
 		this.seen = seen;
 	}
-	public StringProperty getUsername() {
-		return username;
+	public String getUsername() {
+		return username.get();
 	}
 	public void setUsername(StringProperty username) {
 		this.username = username;
 	}
+	@Override
+	public String toString() {
+		return "Complaint [id=" + id + ", username=" + username + ", complaint=" + complaint + ", date=" + date
+				+ ", response=" + response + ", resolved=" + resolved + ", seen=" + seen + "]";
+	}
+	
 
 }
