@@ -3,8 +3,12 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -13,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -62,7 +67,27 @@ public class OneTimeParkingOrderWindowController {
     @FXML
     private TextField CarIDTB;
     
+    private float pricePerHour;
+    private float totalPrice;
+    
     public void Load(){
+    	ArrivalDateBox.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
+    	LeaveDateBox.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
+    	
     	ArrivalTimeMinuteBox.getItems().addAll( // 00->59
     		   "00","01","02","03","04","05","06","07","08","09",
     		   "10","11","12","13","14","15","16","17","18","19",
@@ -101,7 +126,8 @@ public class OneTimeParkingOrderWindowController {
 			RequestedMallMENU.getItems().addAll(MallList);
 			String prices=client.sendmessage("request price 2");
 			split = prices.split(" ");
-			PriceLabel.setText("Price: "+split[1]+"$/h");
+			PriceLabel.setText("Price: "+split[1]+"ILS");
+			pricePerHour=Float.parseFloat(split[1]);
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,10 +192,11 @@ public class OneTimeParkingOrderWindowController {
     		
     	}
 
-    	
-    	
+    
     	LocalDate ArrivalDate= ArrivalDateBox.getValue();
     	LocalDate LeaveDate=LeaveDateBox.getValue();
+    	LocalTime timeArrival = LocalTime.parse(ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue());
+    	LocalTime timeLeave = LocalTime.parse(LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue());
     	if(ArrivalDate.isAfter(LeaveDate))
     	{
     		try {
@@ -182,8 +209,6 @@ public class OneTimeParkingOrderWindowController {
     	}
     	if(ArrivalDate.getYear()==LeaveDate.getYear()&&ArrivalDate.getMonth()==LeaveDate.getMonth()&&
     			ArrivalDate.getDayOfMonth()==LeaveDate.getDayOfMonth()){// IF DAY IS THE SAME CHECK TIME 
-    		LocalTime timeArrival = LocalTime.parse(ArrivalTimeMinuteBox.getValue()+":"+ArrivalTimeHourBox.getValue());
-    		LocalTime timeLeave = LocalTime.parse(LeaveTimeMinuteBox.getValue()+":"+LeaveTimeHourBox.getValue());
     		if(timeArrival.isAfter(timeLeave))
     		{
     			try {
@@ -195,11 +220,20 @@ public class OneTimeParkingOrderWindowController {
         		return; //Alex <3 
     		}
     	}
+    	
+    	LocalDateTime testArrive=LocalDateTime.parse(ArrivalDate.toString()+"T"+timeArrival.toString());
+    	LocalDateTime testLeave=LocalDateTime.parse(LeaveDate.toString()+"T"+timeLeave.toString());
+    	System.out.println(testArrive.toString());
+    	System.out.println(testLeave.toString());
+    	long hours=testArrive.until(testLeave, ChronoUnit.HOURS);
+    	System.out.println("Total price is : "+hours*pricePerHour+" = "+hours+" hours * "+pricePerHour+"ILS");
+    	float price=hours*pricePerHour;
+    	
     	System.out.println("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
 					" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
 				  	ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
 			     		LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
-			        	EmailTB.getText());
+			        	EmailTB.getText()+ " "+String.valueOf(price));
     	// everything after this is =>  the data was entered correctly
     	
     	
@@ -209,9 +243,9 @@ public class OneTimeParkingOrderWindowController {
 
 			if(!client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
 					" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
-					ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
-					LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
-					EmailTB.getText()).equals("acceptedorder"))
+				  	ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
+			     		LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
+			        	EmailTB.getText()+" "+String.valueOf(price)).equals("acceptedorder"))
 			{
 				System.out.println("order failed");
 				CreatePopupWindow popup = new CreatePopupWindow("order Failed");

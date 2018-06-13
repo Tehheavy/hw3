@@ -73,6 +73,9 @@ public class EmployeeWindowController {
     @FXML // fx:id="MyComplaintsMenuItem"
     private MenuItem MyComplaintsMenuItem; // Value injected by FXMLLoader
     
+    
+    //ORDER TYPES:1-regular ,2-ONE TIME , 3- 14 DAY ROUTINE , 4 - 28 day FULL TIME
+    
     @FXML
     void MyComplaintsMenuItemClick(ActionEvent event) {
     	try{
@@ -127,6 +130,24 @@ public class EmployeeWindowController {
 
     @FXML
     void FullTimeSubscriptionMenuItemClick(ActionEvent event) {
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("FullTimeSubscriptionOrderWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            FullTimeSubscriptionOrderWindowController RegisterControl = loader.getController();
+            RegisterControl.setClient(client);
+            RegisterControl.setAccountID(AccountID);
+            RegisterControl.Load();
+            Stage stage = new Stage();
+            stage.setTitle("Order");
+            stage.setScene(new Scene(root));
+        	stage.show();
+//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+//        	stage2.close();
+    		//test
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}
 
     }
 
