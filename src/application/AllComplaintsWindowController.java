@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -160,17 +161,29 @@ public class AllComplaintsWindowController {
 			ComplaintsTable.setItems(data);
 //			ComplaintsTable.setItems(data);
 			
-			ComplaintsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-	            if (newSelection != null) {
-//	                CustomerComplaintBox.setText(newSelection.getComplaint());
-//	                ResponseBox.setText(newSelection.getResponse());
-	                Alert alert = new Alert(null,"Our response:\n"+newSelection.getResponse(), ButtonType.OK);
-//	                alert.setContentText("giv weed");
-//	                newSelection.getUsername()+":\n"+ newSelection.getComplaint()
-	                alert.setHeaderText(newSelection.getUsername()+":\n"+ newSelection.getComplaint());
-	                alert.showAndWait();
-	            }
-	        });
+//			ComplaintsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+//	            if (newSelection != null) {
+////	                CustomerComplaintBox.setText(newSelection.getComplaint());
+////	                ResponseBox.setText(newSelection.getResponse());
+//	                Alert alert = new Alert(null,"Our response:\n"+newSelection.getResponse(), ButtonType.OK);
+////	                alert.setContentText("giv weed");
+////	                newSelection.getUsername()+":\n"+ newSelection.getComplaint()
+//	                alert.setHeaderText(newSelection.getUsername()+":\n"+ newSelection.getComplaint());
+//	                alert.showAndWait();
+//	            }
+//	        });
+			ComplaintsTable.setRowFactory( tv -> {
+			    TableRow<Complaint> row = new TableRow<Complaint>();
+			    row.setOnMouseClicked(event -> {
+			        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+			            Complaint rowData = row.getItem();
+			            Alert alert = new Alert(null,"Our response:\n"+rowData.getResponse(), ButtonType.OK);
+			            alert.setHeaderText(rowData.getUsername()+":\n"+ rowData.getComplaint());
+			            alert.showAndWait();
+////	                alert.setContentText("giv weed");
+			    }});
+			    return row ;
+			});
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
