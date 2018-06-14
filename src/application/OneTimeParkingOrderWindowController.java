@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -223,6 +224,7 @@ public class OneTimeParkingOrderWindowController {
     	
     	LocalDateTime testArrive=LocalDateTime.parse(ArrivalDate.toString()+"T"+timeArrival.toString());
     	LocalDateTime testLeave=LocalDateTime.parse(LeaveDate.toString()+"T"+timeLeave.toString());
+    	Timestamp timearrive= Timestamp.valueOf(testArrive);
     	System.out.println(testArrive.toString());
     	System.out.println(testLeave.toString());
     	long hours=testArrive.until(testLeave, ChronoUnit.HOURS);
@@ -240,7 +242,6 @@ public class OneTimeParkingOrderWindowController {
     	try{
 			//192.168.1.17
 			//11.1.4.79
-
 			if(!client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
 					" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
 				  	ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
