@@ -171,7 +171,24 @@ public class EmployeeWindowController {
 
     @FXML
     void VehicleEnterMethod(ActionEvent event) {
-
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkingChoiceWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            ParkingChoiceWindowController pcwc = loader.getController();
+//            RegisterControl.setClient(client);
+//            RegisterControl.setAccountID(AccountID);
+            pcwc.load();
+            Stage stage = new Stage();
+            stage.setTitle("Order");
+            stage.setScene(new Scene(root));
+        	stage.show();
+//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+//        	stage2.close();
+    		//test
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}
     }
 
     @FXML
