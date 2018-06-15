@@ -238,7 +238,6 @@ public class OneTimeParkingOrderWindowController {
 			        	EmailTB.getText()+ " "+String.valueOf(price));
     	// everything after this is =>  the data was entered correctly
     	
-    	
     	try{
 			//192.168.1.17
 			//11.1.4.79
