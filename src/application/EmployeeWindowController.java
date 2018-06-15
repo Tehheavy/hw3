@@ -125,6 +125,24 @@ public class EmployeeWindowController {
 
     @FXML
     void RoutineSubscriptionMenuItemClick(ActionEvent event) {
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("RoutineParkingOrderWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            RoutineParkingOrderWindowController RegisterControl = loader.getController();
+            RegisterControl.setClient(client);
+            RegisterControl.setAccountID(AccountID);
+            RegisterControl.Load();
+            Stage stage = new Stage();
+            stage.setTitle("Order");
+            stage.setScene(new Scene(root));
+        	stage.show();
+//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+//        	stage2.close();
+    		//test
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}
 
     }
 
