@@ -241,16 +241,25 @@ public class OneTimeParkingOrderWindowController {
     	try{
 			//192.168.1.17
 			//11.1.4.79
-			if(!client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
+    		
+    		String resultA=client.sendmessage("order "+"2 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
 					" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
 				  	ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
 			     		LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
-			        	EmailTB.getText()+" "+String.valueOf(price)).equals("acceptedorder"))
+			        	EmailTB.getText()+" "+String.valueOf(price));
+			if(!resultA.equals("acceptedorder"))
 			{
+				if(resultA.equals("nospaceorder"))
+				{
+					CreatePopupWindow popup = new CreatePopupWindow("No space in selected mall, please \n try a different one");
+					return;
+				}
+				else{
 				System.out.println("order failed");
 				CreatePopupWindow popup = new CreatePopupWindow("order Failed");
 				
 				return;
+				}
 			}
 			CreatePopupWindow popup = new CreatePopupWindow("Order Successful");
 			
