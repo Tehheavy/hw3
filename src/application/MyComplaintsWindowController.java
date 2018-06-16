@@ -65,7 +65,6 @@ public class MyComplaintsWindowController {
     	String[][] rs=null;
     	String[][] rs2=null;
     	try {
-    		System.out.println("alex test");
     		rs=(String[][])client.sendmessage2("request "+"complaints"+" "+AccountID);
     		rs2=(String[][])client.sendmessage2("request "+"allcomplaints");
     		System.out.println("test");
@@ -77,7 +76,6 @@ public class MyComplaintsWindowController {
 
     		if(rs==null)
     		{
-    			System.out.println("test alex banana");
     			return;
     		}
 			for(int i=0;i<rs.length;i++)

@@ -6,6 +6,7 @@ public class ParkingOrder {
 
 	private int id;
 	private int PersonID;
+	private int carID;
 	private int type;
 	private String RequestMall;
 	private String Email;
@@ -13,11 +14,12 @@ public class ParkingOrder {
 	private int price;
 	private Timestamp arrivetime;
 	private Timestamp leavetime;
-	public ParkingOrder(int id, int personID, int type, String requestMall, String email, String username, int price,
+	public ParkingOrder(int id, int personID,int carID, int type, String requestMall, String email, String username, int price,
 			Timestamp arrivetime, Timestamp leavetime) {
 		super();
 		this.id = id;
 		PersonID = personID;
+		this.carID=carID;
 		this.type = type;
 		RequestMall = requestMall;
 		Email = email;
@@ -31,13 +33,13 @@ public class ParkingOrder {
 	 */
 	@Override
 	public String toString() {
-//		return "ParkingOrder [id=" + id + ", PersonID=" + PersonID + ", type=" + type + ", "
-//				+ (RequestMall != null ? "RequestMall=" + RequestMall + ", " : "")
-//				+ (Email != null ? "Email=" + Email + ", " : "")
-//				+ (Username != null ? "Username=" + Username + ", " : "") + "price=" + price + ", "
-//				+ (arrivetime != null ? "arrivetime=" + arrivetime + ", " : "")
-//				+ (leavetime != null ? "leavetime=" + leavetime : "") + "]";
-		return "gimme crack daddy";
+		return "ParkingOrder [id=" + id + ", PersonID=" + PersonID + ", carID="+ carID +", type=" + type + ", "
+				+ (RequestMall != null ? "RequestMall=" + RequestMall + ", " : "")
+				+ (Email != null ? "Email=" + Email + ", " : "")
+				+ (Username != null ? "Username=" + Username + ", " : "") + "price=" + price + ", "
+				+ (arrivetime != null ? "arrivetime=" + arrivetime + ", " : "")
+				+ (leavetime != null ? "leavetime=" + leavetime : "") + "]";
+//		return "gimme crack daddy";
 	}
 	
 }
