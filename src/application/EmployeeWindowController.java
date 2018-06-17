@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.ParkingChoiceWindowController.modes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -177,7 +178,7 @@ public class EmployeeWindowController {
             ParkingChoiceWindowController pcwc = loader.getController();
             pcwc.setClient(client);
             pcwc.setAccountID(AccountID);
-            pcwc.load();
+            pcwc.load(modes.park);
             Stage stage = new Stage();
             stage.setTitle("Order");
             stage.setScene(new Scene(root));
@@ -193,12 +194,46 @@ public class EmployeeWindowController {
 
     @FXML
     void VehicleLeaveMethod(ActionEvent event) {
-
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkingChoiceWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            ParkingChoiceWindowController pcwc = loader.getController();
+            pcwc.setClient(client);
+            pcwc.setAccountID(AccountID);
+            pcwc.load(modes.exit);
+            Stage stage = new Stage();
+            stage.setTitle("Get vehicle");
+            stage.setScene(new Scene(root));
+        	stage.show();
+//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+//        	stage2.close();
+    		//test
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}
     }
 
     @FXML
     void ParkingCancelMethod(ActionEvent event) {
-
+    	try{
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkingChoiceWindow.fxml"));
+            Parent root = (Parent) loader.load();
+            ParkingChoiceWindowController pcwc = loader.getController();
+            pcwc.setClient(client);
+            pcwc.setAccountID(AccountID);
+            pcwc.load(modes.cancel);
+            Stage stage = new Stage();
+            stage.setTitle("Cancel order");
+            stage.setScene(new Scene(root));
+        	stage.show();
+//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+//        	stage2.close();
+    		//test
+        	}
+        	catch(IOException e){
+        		e.printStackTrace();
+        	}
     }
     @FXML
     void FileAComplaintMenuItemClick(ActionEvent event) {
