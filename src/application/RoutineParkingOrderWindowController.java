@@ -17,6 +17,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RoutineParkingOrderWindowController {
 	String AccountID;
@@ -93,6 +94,7 @@ public class RoutineParkingOrderWindowController {
 			split = prices.split(" ");
 			PriceLabel.setText("Price: "+String.valueOf((float)36*Float.parseFloat(split[1]))+" ILS");
 			price=36*Float.parseFloat(split[1]);
+			RequestedMallMENU.setVisible(false);
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +115,7 @@ public class RoutineParkingOrderWindowController {
 		//    	String date2 = LeaveDateBox.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		//    	String[] dateSplit1=date1.split("-");
 		//    	String[] dateSplit2=date2.split("-");
-		if(ArrivalDateBox.getValue()==null||RequestedMallMENU.getValue()==null||
+		if(ArrivalDateBox.getValue()==null||
 				EmailTB.getText().isEmpty()||CarIDTB.getText().isEmpty()||IDTB.getText().isEmpty()
 				||ArrivalTimeMinuteBox.getValue().isEmpty()||ArrivalTimeHourBox.getValue().isEmpty()
 				){
@@ -162,7 +164,7 @@ public class RoutineParkingOrderWindowController {
 		LocalDate ArrivalDate= ArrivalDateBox.getValue();
 		LocalDate LeaveDate = ArrivalDate.plusDays(14);
 		System.out.println("order "+"3 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
-				" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
+				" "+ArrivalDateBox.getValue().toString()+" "+
 				ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
 				LeaveDate.toString()+" "+ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
 				EmailTB.getText()+" "+String.valueOf(price));
@@ -176,7 +178,7 @@ public class RoutineParkingOrderWindowController {
 					//11.1.4.79
 		
 					if(!client.sendmessage("order "+"3 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
-							" "+RequestedMallMENU.getValue()+" "+ArrivalDateBox.getValue().toString()+" "+
+							" "+ArrivalDateBox.getValue().toString()+" "+
 							ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
 							LeaveDate.toString()+" "+ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
 							EmailTB.getText()+" "+String.valueOf(price)).equals("acceptedorder"))
@@ -195,6 +197,8 @@ public class RoutineParkingOrderWindowController {
 				{
 					System.out.println("Order failed");
 				}
+		    	Stage stage2 = (Stage) OrderButton .getScene().getWindow();
+		    	stage2.close();
 		    	return;
 	}
 

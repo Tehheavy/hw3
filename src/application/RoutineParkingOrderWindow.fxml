@@ -16,7 +16,6 @@
           <children>
             <Label text="ID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label text="CarID" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Requested mall" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label text="Arrival Date" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                   <DatePicker fx:id="ArrivalDateBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Arrival Time" GridPane.rowIndex="4" />

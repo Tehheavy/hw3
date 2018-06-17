@@ -22,6 +22,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class OneTimeParkingOrderWindowController {
 	String AccountID;
@@ -270,6 +271,8 @@ public class OneTimeParkingOrderWindowController {
 		{
 			System.out.println("Order failed");
 		}
+    	Stage stage2 = (Stage) OrderButton .getScene().getWindow();
+    	stage2.close();
     	return;
     }
 
