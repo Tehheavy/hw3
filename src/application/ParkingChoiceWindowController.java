@@ -118,7 +118,9 @@ public class ParkingChoiceWindowController {
 										return;
 									}
 									else{
-										System.out.println("nice");
+										System.out.println("nice, u select da mall:" + mallchoiceComboBox.getSelectionModel().getSelectedItem().toString());
+										System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())
+										+" "+ mallchoiceComboBox.getSelectionModel().getSelectedItem().toString()));
 									}
 								}
 							} catch (ClassNotFoundException e) {
