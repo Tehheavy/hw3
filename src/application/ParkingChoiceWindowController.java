@@ -8,12 +8,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -29,8 +33,6 @@ public class ParkingChoiceWindowController {
 	@FXML // URL location of the FXML file that was given to the FXMLLoader
 	private URL location;
 
-	@FXML // fx:id="ParkingChoicesListView"
-	private ListView<ParkingOrder> ParkingChoicesListView; // Value injected by FXMLLoader
 
 	public void setAccountID(String rhs)
 	{
@@ -41,10 +43,16 @@ public class ParkingChoiceWindowController {
 		client=rhs;
 	}
 
+	@FXML // fx:id="ParkingChoicesListView"
+	private ListView<ParkingOrder> ParkingChoicesListView; // Value injected by FXMLLoader
+
+	@FXML // fx:id="mallchoiceComboBox"
+	private ComboBox<String> mallchoiceComboBox; // Value injected by FXMLLoader
+
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
+		assert mallchoiceComboBox != null : "fx:id=\"mallchoiceComboBox\" was not injected: check your FXML file 'ParkingChoiceWindow.fxml'.";
 		assert ParkingChoicesListView != null : "fx:id=\"ParkingChoicesListView\" was not injected: check your FXML file 'ParkingChoiceWindow.fxml'.";
-
 
 	}
 	public enum modes{park,exit,cancel};
@@ -53,10 +61,22 @@ public class ParkingChoiceWindowController {
 		curmode=choicetype;
 		ObservableList<ParkingOrder> items =FXCollections.observableArrayList();
 		String[][] rs=null;
+		mallchoiceComboBox.setVisible(false);
+		mallchoiceComboBox.setManaged(false);
+		
 		switch(curmode){
 		case park:
 			try {
 				rs=(String[][])client.sendmessage2("request "+"parking"+" "+AccountID);
+				String malls=client.sendmessage("request malls");
+				System.out.println("Requested malls: "+malls);
+				String[] split = malls.split(" ");
+				ArrayList<String> MallList=new ArrayList<String>();
+				for(int i=1;i<split.length;i++)
+				{
+					MallList.add(split[i]);
+				}
+				mallchoiceComboBox.getItems().addAll(MallList);
 				if(rs!=null)
 					for(int i=0;i<rs.length;i++){
 						for(int j= 0;j<rs[i].length;j++)
@@ -80,12 +100,27 @@ public class ParkingChoiceWindowController {
 				ParkingChoicesListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent click) {
+						ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
 						if (click.getClickCount() == 2) {
 							//Use ListView's getSelected Item
-							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
 							System.out.println(currentItemSelected);
 							try {
-								System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())));
+								if(currentItemSelected.getType()!=3&&currentItemSelected.getType()!=4)
+									System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())));
+								else{
+									if( mallchoiceComboBox.getSelectionModel().isEmpty()){
+										Alert alert = new Alert(AlertType.WARNING);
+										alert.setTitle("Warning Dialog");
+										alert.setHeaderText("You havent selected a mall!");
+										alert.setContentText("Please select a mall!");
+
+										alert.showAndWait();
+										return;
+									}
+									else{
+										System.out.println("nice");
+									}
+								}
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -93,11 +128,22 @@ public class ParkingChoiceWindowController {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
+
 							Stage stage = (Stage)ParkingChoicesListView.getScene().getWindow();
 							stage.close();
 							//use this to do whatever you want to. Open Link etc.
 						}
+						else{
+							if(currentItemSelected.getType()==3||currentItemSelected.getType()==4){
+								mallchoiceComboBox.setVisible(true);
+								mallchoiceComboBox.setManaged(true);
+							}
+							else{
+								mallchoiceComboBox.setVisible(false);
+								mallchoiceComboBox.setManaged(false);
+							}
+						}
+						
 					}
 				});
 			} catch (ClassNotFoundException e) {
