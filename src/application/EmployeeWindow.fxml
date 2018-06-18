@@ -34,7 +34,7 @@
                   </Menu>
             <Menu fx:id="EditMenu" mnemonicParsing="false" text="Edit">
               <items>
-                <MenuItem fx:id="EditPricesMenuItem" mnemonicParsing="false" text="Edit prices" />
+                <MenuItem fx:id="EditPricesMenuItem" mnemonicParsing="false" onAction="#EditPricesMenuItemClick" text="Edit prices" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Show">
