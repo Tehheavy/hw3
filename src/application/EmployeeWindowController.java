@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class EmployeeWindowController {
@@ -89,6 +90,10 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("My Complaints");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
+
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
