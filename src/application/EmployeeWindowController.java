@@ -119,6 +119,9 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("Order");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
@@ -141,6 +144,9 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("Order");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
@@ -164,6 +170,9 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("Order");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
@@ -187,6 +196,9 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("Order");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
@@ -209,6 +221,9 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("Get vehicle");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
@@ -231,6 +246,9 @@ public class EmployeeWindowController {
             Stage stage = new Stage();
             stage.setTitle("Cancel order");
             stage.setScene(new Scene(root));
+            Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
         	stage.show();
 //    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
 //        	stage2.close();
@@ -252,6 +270,9 @@ public class EmployeeWindowController {
 	        Stage stage = new Stage();
 	        stage.setScene(new Scene(root));
 	        stage.setTitle("Complaint Window");
+	        Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
 	    	stage.show();
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
@@ -271,6 +292,9 @@ public class EmployeeWindowController {
 	        Stage stage = new Stage();
 	        stage.setScene(new Scene(root));
 	        stage.setTitle("Complaint Window");
+	        Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
 	    	stage.show();
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
@@ -291,6 +315,9 @@ public class EmployeeWindowController {
 	        Stage stage = new Stage();
 	        stage.setScene(new Scene(root));
 	        stage.setTitle("Request price change");
+	        Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
 	    	stage.show();
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
