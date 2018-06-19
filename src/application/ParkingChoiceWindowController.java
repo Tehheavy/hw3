@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -188,6 +189,13 @@ public class ParkingChoiceWindowController {
 						if (click.getClickCount() == 2) {
 							//Use ListView's getSelected Item
 							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
+							Timestamp time1=currentItemSelected.getArrivetime();
+							Timestamp time2=currentItemSelected.getLeavetime();
+							Timestamp curtime = new Timestamp(System.currentTimeMillis());
+							LocalDateTime LeavTime=LocalDateTime.parse(time1.toString().substring(0,10)+"T"+time1.toString().substring(11, 19));
+							LocalDateTime CurrTime=LocalDateTime.parse(curtime.toString().substring(0,10)+"T"+curtime.toString().substring(11, 19));
+							long hours=LeavTime.until(CurrTime, ChronoUnit.HOURS);
+							//curtime.tos
 							System.out.println(currentItemSelected);
 							try {
 								String res=client.sendmessage("request unparkmyvehicle "+Integer.toString(currentItemSelected.getCarID())+" "+
@@ -199,7 +207,7 @@ public class ParkingChoiceWindowController {
 								alert.setTitle("Information Dialog");
 								alert.setHeaderText("Request succesful");
 								alert.setContentText("Please wait till the robot brings the car, total price is:"+res
-										+"\n u were spent <insert time> time parked ");
+										+"\n you've spent "+hours+" hours parked ");
 								Button bt =(Button) alert.getDialogPane().lookupButton(ButtonType.OK);
 								bt.setText("Click here to pay up");
 

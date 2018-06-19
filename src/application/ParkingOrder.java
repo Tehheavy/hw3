@@ -58,6 +58,14 @@ public class ParkingOrder {
 		this.arrivetime = arrivetime;
 		this.leavetime = leavetime;
 	}
+	public Timestamp getArrivetime() {
+		return arrivetime;
+	}
+
+	public Timestamp getLeavetime() {
+		return leavetime;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
