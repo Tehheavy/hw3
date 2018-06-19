@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.PriceChangeRequestsWindowController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="250.0">
+         <children>
+            <Label text="Select a request" />
+            <ComboBox fx:id="RequestsBox" prefWidth="150.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="AcceptButton" mnemonicParsing="false" onAction="#AcceptButtonClick" text="Accept">
+                     <HBox.margin>
+                        <Insets right="40.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="DeclineButton" mnemonicParsing="false" onAction="#DeclineButtonClick" text="Decline" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

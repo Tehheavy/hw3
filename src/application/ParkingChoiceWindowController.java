@@ -209,7 +209,7 @@ public class ParkingChoiceWindowController {
 									alert.setTitle("Information Dialog");
 									alert.setHeaderText("Request succesful");
 									if(curtime.after(time2))
-										alert.setContentText("Please wait till the robot brings the car, total price is:"+((float)hours*Float.parseFloat(splited[1]))*2
+										alert.setContentText("Please wait till the robot brings the car, total price is:"+((float)hours*Float.parseFloat(splited[1]))*1.2
 												+"\n you've spent "+hours+" hours parked,you are also late ");
 									else
 										alert.setContentText("Please wait till the robot brings the car, total price is:"+res

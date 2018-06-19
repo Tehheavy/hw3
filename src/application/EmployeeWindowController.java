@@ -50,6 +50,9 @@ public class EmployeeWindowController {
 
     @FXML // fx:id="NameMenuBar"
     private Menu NameMenuBar; // Value injected by FXMLLoader
+    
+    @FXML
+    private MenuItem PriceChangesMenuItem;
 
     @FXML // fx:id="EditPricesMenuItem"
     private MenuItem EditPricesMenuItem; // Value injected by FXMLLoader
@@ -324,6 +327,28 @@ public class EmployeeWindowController {
     		e.printStackTrace();
     	}
     }
+    @FXML
+    void PriceChangesMenuItemClick(ActionEvent event) {
+    	try {
+	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("PriceChangeRequestsWindow.fxml"));
+	        Parent root;
+				root = (Parent) loader.load();
+				PriceChangeRequestsWindowController CusControl = loader.getController();
+	        CusControl.setClient(client);
+	        CusControl.setAccountID(AccountID);
+	        CusControl.load();
+	        Stage stage = new Stage();
+	        stage.setScene(new Scene(root));
+	        stage.setTitle("Check requests");
+	        Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+            stage.initOwner(stage2);
+            stage.initModality(Modality.WINDOW_MODAL);
+	    	stage.show();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    }
 
     
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -342,6 +367,7 @@ public class EmployeeWindowController {
         assert RoutineSubscriptionMenuItem != null : "fx:id=\"RoutineSubscriptionMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
         assert ExitMenuItem != null : "fx:id=\"ExitMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
         assert FullTimeSubscriptionMenuItem != null : "fx:id=\"FullTimeSubscriptionMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert PriceChangesMenuItem != null : "fx:id=\"PriceChangesMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
     }
 	String AccountID;
 	ClientClass client;
