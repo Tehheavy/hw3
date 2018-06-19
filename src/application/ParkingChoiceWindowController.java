@@ -17,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -157,9 +159,9 @@ public class ParkingChoiceWindowController {
 			}
 			break;
 		case exit:
-			System.out.println("sexy boy");
+//			System.out.println("sexy boy");
 			try {
-				rs=(String[][])client.sendmessage2("request "+"parking"+" "+AccountID);
+				rs=(String[][])client.sendmessage2("request "+"parkedcars"+" "+AccountID);
 				if(rs!=null)
 					for(int i=0;i<rs.length;i++){
 						for(int j= 0;j<rs[i].length;j++)
@@ -187,6 +189,29 @@ public class ParkingChoiceWindowController {
 							//Use ListView's getSelected Item
 							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
 							System.out.println(currentItemSelected);
+							try {
+								String res=client.sendmessage("request unparkmyvehicle "+Integer.toString(currentItemSelected.getCarID())+" "+
+							AccountID);
+								System.out.println(res);
+								if(!(currentItemSelected.getType()>2)) {
+									
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Information Dialog");
+								alert.setHeaderText("Request succesful");
+								alert.setContentText("Please wait till the robot brings the car, total price is:"+res
+										+"\n u were spent <insert time> time parked ");
+								Button bt =(Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+								bt.setText("Click here to pay up");
+
+								alert.showAndWait();
+								}
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							Stage stage = (Stage)ParkingChoicesListView.getScene().getWindow();
 							stage.close();
 							//use this to do whatever you want to. Open Link etc.

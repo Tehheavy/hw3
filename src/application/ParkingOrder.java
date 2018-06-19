@@ -7,6 +7,12 @@ public class ParkingOrder {
 	private int id;
 	private int PersonID;
 	private int carID;
+	public int getCarID() {
+		return carID;
+	}
+	public void setCarID(int carID) {
+		this.carID = carID;
+	}
 	private int type;
 	/**
 	 * @return the id
