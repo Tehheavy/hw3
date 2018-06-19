@@ -66,7 +66,7 @@ public class ParkingChoiceWindowController {
 		String[][] rs=null;
 		mallchoiceComboBox.setVisible(false);
 		mallchoiceComboBox.setManaged(false);
-		
+
 		switch(curmode){
 		case park:
 			try {
@@ -148,7 +148,7 @@ public class ParkingChoiceWindowController {
 								mallchoiceComboBox.setManaged(false);
 							}
 						}
-						
+
 					}
 				});
 			} catch (ClassNotFoundException e) {
@@ -160,7 +160,7 @@ public class ParkingChoiceWindowController {
 			}
 			break;
 		case exit:
-//			System.out.println("sexy boy");
+			//			System.out.println("sexy boy");
 			try {
 				rs=(String[][])client.sendmessage2("request "+"parkedcars"+" "+AccountID);
 				if(rs!=null)
@@ -189,29 +189,35 @@ public class ParkingChoiceWindowController {
 						if (click.getClickCount() == 2) {
 							//Use ListView's getSelected Item
 							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
+							System.out.println(currentItemSelected);
 							Timestamp time1=currentItemSelected.getArrivetime();
 							Timestamp time2=currentItemSelected.getLeavetime();
 							Timestamp curtime = new Timestamp(System.currentTimeMillis());
-							LocalDateTime LeavTime=LocalDateTime.parse(time1.toString().substring(0,10)+"T"+time1.toString().substring(11, 19));
+							LocalDateTime startTime=LocalDateTime.parse(time1.toString().substring(0,10)+"T"+time1.toString().substring(11, 19));
 							LocalDateTime CurrTime=LocalDateTime.parse(curtime.toString().substring(0,10)+"T"+curtime.toString().substring(11, 19));
-							long hours=LeavTime.until(CurrTime, ChronoUnit.HOURS);
+							long hours=startTime.until(CurrTime, ChronoUnit.HOURS);
 							//curtime.tos
-							System.out.println(currentItemSelected);
 							try {
+								String price =client.sendmessage("request price "+Integer.toString(currentItemSelected.getType()));
+								String[] splited = price.split(" ");
 								String res=client.sendmessage("request unparkmyvehicle "+Integer.toString(currentItemSelected.getCarID())+" "+
-							AccountID);
+										AccountID);
 								System.out.println(res);
 								if(!(currentItemSelected.getType()>2)) {
-									
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Information Dialog");
-								alert.setHeaderText("Request succesful");
-								alert.setContentText("Please wait till the robot brings the car, total price is:"+res
-										+"\n you've spent "+hours+" hours parked ");
-								Button bt =(Button) alert.getDialogPane().lookupButton(ButtonType.OK);
-								bt.setText("Click here to pay up");
 
-								alert.showAndWait();
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.setTitle("Information Dialog");
+									alert.setHeaderText("Request succesful");
+									if(curtime.after(time2))
+										alert.setContentText("Please wait till the robot brings the car, total price is:"+((float)hours*Float.parseFloat(splited[1]))*2
+												+"\n you've spent "+hours+" hours parked,you are also late ");
+									else
+										alert.setContentText("Please wait till the robot brings the car, total price is:"+res
+												+"\n you've spent "+hours+" hours parked");
+									Button bt =(Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+									bt.setText("Click here to pay up");
+
+									alert.showAndWait();
 								}
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
@@ -237,7 +243,8 @@ public class ParkingChoiceWindowController {
 		case cancel:
 			System.out.println("very sexy boy");
 			try {
-				rs=(String[][])client.sendmessage2("request "+"parking"+" "+AccountID);
+				//				rs=(String[][])client.sendmessage2("request "+"parking"+" "+AccountID);
+				rs=(String[][])client.sendmessage2("request "+"cancelableorder"+" "+AccountID);
 				if(rs!=null)
 					for(int i=0;i<rs.length;i++){
 						for(int j= 0;j<rs[i].length;j++)
@@ -265,6 +272,45 @@ public class ParkingChoiceWindowController {
 							//Use ListView's getSelected Item
 							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
 							System.out.println(currentItemSelected);
+							Timestamp time1=currentItemSelected.getArrivetime();
+							Timestamp time2=currentItemSelected.getLeavetime();
+							Timestamp curtime = new Timestamp(System.currentTimeMillis());
+							LocalDateTime startTime=LocalDateTime.parse(time1.toString().substring(0,10)+"T"+time1.toString().substring(11, 19));
+							LocalDateTime CurrTime=LocalDateTime.parse(curtime.toString().substring(0,10)+"T"+curtime.toString().substring(11, 19));
+							long hours=CurrTime.until(startTime, ChronoUnit.HOURS);
+							System.out.println("HOURS IS !!"+hours);
+							//curtime.tos
+							try {
+								String res=client.sendmessage("request cancelorder "+Integer.toString(currentItemSelected.getId()));
+								if(!(currentItemSelected.getType()>2)) {
+
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.setTitle("Information Dialog");
+									alert.setHeaderText("Request succesful");
+									if(hours>3)
+									{
+										System.out.println("90% off");
+										alert.setContentText("Your order has been canceled nin, total price is:"+Float.parseFloat(res)*0.1);
+									}
+									else if(hours<=3&&hours>1)
+									{
+										System.out.println("50% off");
+										alert.setContentText("Your order has been canceled(50%), total price is:"+Float.parseFloat(res)*0.5);
+									}
+									else
+										alert.setContentText("Your order has been canceled, total price is:"+Float.parseFloat(res));
+									Button bt =(Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+									bt.setText("Click here to pay up");
+
+									alert.showAndWait();
+								}
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							Stage stage = (Stage)ParkingChoicesListView.getScene().getWindow();
 							stage.close();
 							//use this to do whatever you want to. Open Link etc.
