@@ -41,7 +41,7 @@
             <Menu mnemonicParsing="false" text="Show">
               <items>
                 <MenuItem fx:id="CustomerComplainsMenuItem" mnemonicParsing="false" onAction="#CustomerComplainsMenuItemClick" text="Customer Complaints..." />
-                        <MenuItem fx:id="ParkingSpotsMenuItem" mnemonicParsing="false" text="My parking spots" />
+                        <MenuItem fx:id="ParkingSpotsMenuItem" mnemonicParsing="false" onAction="#ParkingSpotsMenuItemClick" text="My parking spots" />
                         <MenuItem fx:id="MyComplaintsMenuItem" mnemonicParsing="false" onAction="#MyComplaintsMenuItemClick" text="My Complaints" />
               </items>
             </Menu>

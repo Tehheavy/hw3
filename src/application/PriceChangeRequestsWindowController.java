@@ -17,90 +17,128 @@ public class PriceChangeRequestsWindowController {
 
 	String AccountID;
 	ClientClass client;
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private ComboBox<String> RequestsBox;
+	@FXML
+	private ComboBox<String> RequestsBox;
 
-    @FXML
-    private Button DeclineButton;
+	@FXML
+	private Button DeclineButton;
 
-    @FXML
-    private Button AcceptButton;
-    
-    public void setAccountID(String rhs)
-    {
-    	AccountID=rhs;
-    }
-    public void setClient(ClientClass rhs)
-    {
-    	client=rhs;
-    }
-    public String Hashit(String str){
-    	if(str.equals("1"))
-    		return "casual-parking";
-    	else if(str.equals("2"))
-    		return "one-time-parking";
-    	return null;
-    }
-    public String Hashit2(String str){
-    	if(str.equals("casual-parking"))
-    		return "1";
-    	else if(str.equals("one-time-parking"))
-    		return "2";
-    	return null;
-    }
-    public String UnHashit(String str){
-    	String[] split = str.split(" ");
-    	return split[0]+" "+Hashit2(split[2])+" "+split[5];
-    }
-    
-    public void load(){
+	@FXML
+	private Button AcceptButton;
+
+	public void setAccountID(String rhs)
+	{
+		AccountID=rhs;
+	}
+	public void setClient(ClientClass rhs)
+	{
+		client=rhs;
+	}
+	public String Hashit(String str){
+		if(str.equals("1"))
+			return "casual-parking";
+		else if(str.equals("2"))
+			return "one-time-parking";
+		return null;
+	}
+	public String Hashit2(String str){
+		if(str.equals("casual-parking"))
+			return "1";
+		else if(str.equals("one-time-parking"))
+			return "2";
+		return null;
+	}
+	public String UnHashit(String str){
+		String[] split = str.split(" ");
+		return split[0]+" "+Hashit2(split[2])+" "+split[5];
+	}
+
+	public void load(){
 		try {
 
 			String malls=client.sendmessage("request pricerequests");
-			System.out.println("Requested requests: "+malls);
-			String[] split = malls.split(" ");
-			ArrayList<String> MallList=new ArrayList<String>();
-			for(int i=0;i<split.length;i+=3)
-			{
-				String str1=split[i];
-				String str2=split[i+1];
-				String str3=split[i+2];
-			//	MallList.add(split[i]+" "+split[i+1]+" "+split[i+2]);
-				MallList.add(split[i]+" change "+Hashit(split[i+1])+" price to "+split[i+2]);
+			if(malls!=null){
+				System.out.println("Requested requests: "+malls);
+				String[] split = malls.split(" ");
+				ArrayList<String> MallList=new ArrayList<String>();
+				for(int i=0;i<split.length;i+=3)
+				{
+					String str1=split[i];
+					String str2=split[i+1];
+					String str3=split[i+2];
+					//	MallList.add(split[i]+" "+split[i+1]+" "+split[i+2]);
+					MallList.add(split[i]+" change "+Hashit(split[i+1])+" price to "+split[i+2]);
+				}
+				RequestsBox.getItems().addAll(MallList);
 			}
-			RequestsBox.getItems().addAll(MallList);
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    }
 
-    @FXML
-    void AcceptButtonClick(ActionEvent event) {
-    	if(!RequestsBox.getValue().isEmpty())
-    	{
-    		System.out.println(UnHashit(RequestsBox.getValue()));
-    	}
+	}
 
-    }
+	@FXML
+	void AcceptButtonClick(ActionEvent event) {
+		if(RequestsBox.getValue()!=null)
+		{
+			String s=RequestsBox.getValue();
+			System.out.println(UnHashit(RequestsBox.getValue()));
+			try {
+				String result=client.sendmessage("request changeprice "+UnHashit(RequestsBox.getValue()));
+				System.out.println(result);
+				RequestsBox.getItems().remove(s);
 
-    @FXML
-    void DeclineButtonClick(ActionEvent event) {
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			return;
+		}
 
-    }
+	}
 
-    @FXML
-    void initialize() {
-        assert RequestsBox != null : "fx:id=\"RequestsBox\" was not injected: check your FXML file 'PriceChangeRequestsWindow.fxml'.";
-        assert DeclineButton != null : "fx:id=\"DeclineButton\" was not injected: check your FXML file 'PriceChangeRequestsWindow.fxml'.";
-        assert AcceptButton != null : "fx:id=\"AcceptButton\" was not injected: check your FXML file 'PriceChangeRequestsWindow.fxml'.";
+	@FXML
+	void DeclineButtonClick(ActionEvent event) {
+		if(RequestsBox.getValue()!=null)
+		{
+			String s=RequestsBox.getValue();
+			System.out.println(UnHashit(RequestsBox.getValue()));
+			try {
+				String result=client.sendmessage("request pricedelete "+UnHashit(RequestsBox.getValue()));
+				System.out.println(result);
+				RequestsBox.getItems().remove(s);
 
-    }
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			return;
+		}
+
+	}
+
+	@FXML
+	void initialize() {
+		assert RequestsBox != null : "fx:id=\"RequestsBox\" was not injected: check your FXML file 'PriceChangeRequestsWindow.fxml'.";
+		assert DeclineButton != null : "fx:id=\"DeclineButton\" was not injected: check your FXML file 'PriceChangeRequestsWindow.fxml'.";
+		assert AcceptButton != null : "fx:id=\"AcceptButton\" was not injected: check your FXML file 'PriceChangeRequestsWindow.fxml'.";
+
+	}
 }
