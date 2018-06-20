@@ -16,8 +16,8 @@
           <menus>
                   <Menu fx:id="NameMenuBar" mnemonicParsing="false" text="&lt;Employe name&gt;">
                      <items>
-                        <MenuItem fx:id="ChangeUserMenuItem" mnemonicParsing="false" text="Change user" />
-                        <MenuItem fx:id="ExitMenuItem" mnemonicParsing="false" text="Exit" />
+                        <MenuItem fx:id="ChangeUserMenuItem" mnemonicParsing="false" onAction="#ChangeUserMenuItemClick" text="Change user" />
+                        <MenuItem fx:id="ExitMenuItem" mnemonicParsing="false" onAction="#ExitMenuItemClick" text="Exit" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Order...">

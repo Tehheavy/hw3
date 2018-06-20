@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.ParkingChoiceWindowController.modes;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -344,6 +346,29 @@ public class EmployeeWindowController {
             stage.initOwner(stage2);
             stage.initModality(Modality.WINDOW_MODAL);
 	    	stage.show();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    }
+    @FXML
+    void ExitMenuItemClick(ActionEvent event) {
+    	Platform.exit();
+    }
+    @FXML
+    void ChangeUserMenuItemClick(ActionEvent event) {
+    	try {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginWindow.fxml"));
+        Parent root;
+				root = (Parent) loader.load();
+			LoginWindowController CusControl = loader.getController();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login");
+        Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+        stage.initModality(Modality.WINDOW_MODAL);
+    	stage.show();
+    	stage2.close();
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();

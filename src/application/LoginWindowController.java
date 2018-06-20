@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class LoginWindowController {
@@ -29,8 +32,12 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("192.168.1.17","4138");
+			client=new ClientClass("192.168.1.128","4138");
 		} catch(Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Could no reach server, please try again later");
+			alert.showAndWait();
+			Platform.exit();
 			System.out.println("Could Not Connect to server");
 		}
 	}
