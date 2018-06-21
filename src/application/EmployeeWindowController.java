@@ -109,6 +109,27 @@ public class EmployeeWindowController {
 		}    }
 	@FXML
 	void OrderCasualParkingMenuItemClick(ActionEvent event) {
+		try{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("CasualParkingOrderWindow.fxml"));
+			Parent root = (Parent) loader.load();
+			CasualParkingOrderWindowController RegisterControl = loader.getController();
+			RegisterControl.setClient(client);
+			RegisterControl.setAccountID(AccountID);
+			RegisterControl.Load();
+			Stage stage = new Stage();
+			stage.setTitle("Order");
+			stage.setScene(new Scene(root));
+			Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+			stage.initOwner(stage2);
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.show();
+			//    		Stage stage2 = (Stage) OrderOneTimeParkingMenuItem .getScene().getWindow();
+			//        	stage2.close();
+			//test
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 
 	}
 
