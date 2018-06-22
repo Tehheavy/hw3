@@ -40,7 +40,7 @@
                         <Insets left="65.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <TextField fx:id="EmailTB" text="bob@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="EmailTB" promptText="bob@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Requested mall" GridPane.rowIndex="2" />
           </children>
           <columnConstraints>
@@ -57,7 +57,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-            <Button fx:id="OrderButton" layoutX="50.0" layoutY="261.0" mnemonicParsing="false" onAction="#OrderButtonClick" text="Order" />
+            <Button fx:id="OrderButton" layoutX="50.0" layoutY="261.0" mnemonicParsing="false" onAction="#OrderButtonClick" text="Park" />
             <Label fx:id="PriceLabel" layoutX="196.0" layoutY="265.0" text="Price:" />
       </children>
     </Pane>

@@ -12,14 +12,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javax.sound.midi.Synthesizer;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class CasualParkingOrderWindowController {
@@ -57,7 +61,7 @@ public class CasualParkingOrderWindowController {
 
 	@FXML
 	private TextField CarIDTB;
-	
+
 	private float price;
 
 	public void Load(){
@@ -109,6 +113,12 @@ public class CasualParkingOrderWindowController {
 		java.util.regex.Matcher m = p.matcher(email);
 		return m.matches();
 	}
+	
+	  public void showalert(String msg){
+	    	Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setContentText(msg);
+	    	alert.showAndWait();
+	    }
 
 
 	@FXML
@@ -172,80 +182,101 @@ public class CasualParkingOrderWindowController {
 		}
 		if(curr.getHour()<10){
 			hour="0"+String.valueOf(curr.getHour());
-			
+
 		}
 		else{
 			hour = String.valueOf(curr.getHour());
 		}
-			
-    	LocalDate LeaveDate=LeaveDateBox.getValue();
-    	LocalTime timeLeave = LocalTime.parse(LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue());
-    	LocalDateTime testLeave=LocalDateTime.parse(LeaveDate.toString()+"T"+timeLeave.toString());
-    	System.out.println(curr.toString());
-    	System.out.println(testLeave.toString());
-    	long hours=curr.until(testLeave, ChronoUnit.HOURS);
-    	System.out.println("Total price is : "+hours*price+" = "+hours+" hours * "+price+"ILS");
-    	float priceTotal=hours*price;
+
+		LocalDate LeaveDate=LeaveDateBox.getValue();
+		LocalTime timeLeave = LocalTime.parse(LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue());
+		LocalDateTime testLeave=LocalDateTime.parse(LeaveDate.toString()+"T"+timeLeave.toString());
+		System.out.println(curr.toString());
+		System.out.println(testLeave.toString());
+		long hours=curr.until(testLeave, ChronoUnit.HOURS);
+		System.out.println("Total price is : "+hours*price+" = "+hours+" hours * "+price+"ILS");
+		float priceTotal=hours*price;
 
 		//LocalDate LeaveDate = ArrivalDate.plusDays(28);
-    	System.out.println("order "+"1 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
-					" "+RequestedMallMENU.getValue()+" "+curr.toLocalDate().toString()+" "+
-					hour+":"+min+" "+
-			     		LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
-			        	EmailTB.getText()+ " "+String.valueOf(priceTotal));
+		System.out.println("order "+"1 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
+				" "+RequestedMallMENU.getValue()+" "+curr.toLocalDate().toString()+" "+
+				hour+":"+min+" "+
+				LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
+				EmailTB.getText()+ " "+String.valueOf(priceTotal));
 
 
 		// everything after this is =>  the data was entered correctly
 
 
-//		    	try{
-//					//192.168.1.17
-//					//11.1.4.79
-//		
-//					if(!client.sendmessage("order "+"4 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
-//							" "+ArrivalDateBox.getValue().toString()+" "+
-//							ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
-//							LeaveDate.toString()+" "+ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
-//							EmailTB.getText()+" "+String.valueOf(price)).equals("acceptedorder"))
-//					{
-//						System.out.println("order failed");
-//						CreatePopupWindow popup = new CreatePopupWindow("order Failed");
-//						
-//						return;
-//					}
-//					CreatePopupWindow popup = new CreatePopupWindow("Order Successful");
-//					
-//					
-//		
-//				}
-//				catch(Exception e)
-//				{
-//					System.out.println("Order failed");
-//				}
-//		    	Stage stage2 = (Stage) OrderButton .getScene().getWindow();
-//		    	stage2.close();
-		    	return;
-	}
+	    try{
+		//192.168.1.17
+		//11.1.4.79
 
-	public void setAccountID(String rhs)
-	{
-		AccountID=rhs;
-	}
-	public void setClient(ClientClass rhs)
-	{
-		client=rhs;
-	}
-	@FXML
-	void initialize() {
-		assert LeaveTimeMinuteBox != null : "fx:id=\"ArrivalTimeMinuteBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert OrderButton != null : "fx:id=\"OrderButton\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert RequestedMallMENU != null : "fx:id=\"RequestedMallMENU\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert LeaveTimeHourBox != null : "fx:id=\"ArrivalTimeHourBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert IDTB != null : "fx:id=\"IDTB\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert LeaveDateBox != null : "fx:id=\"ArrivalDateBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert EmailTB != null : "fx:id=\"EmailTB\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert PriceLabel != null : "fx:id=\"PriceLabel\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
-		assert CarIDTB != null : "fx:id=\"CarIDTB\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+		String resultA=client.sendmessage("order "+"1 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
+				" "+RequestedMallMENU.getValue()+" "+curr.toLocalDate().toString()+" "+
+				hour+":"+min+" "+
+				LeaveDateBox.getValue().toString()+" "+LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue()+" "+
+				EmailTB.getText()+" "+String.valueOf(priceTotal));
+		String[] splited = resultA.split(" ");
+		System.out.println("ORDER RESULT IS "+resultA);
+		System.out.println("zzz");
+		if(!splited[0].equals("acceptedorder"))
+		{
+			if(splited[0].equals("nospaceorder"))
+			{
+				showalert("No space in selected mall, please \n try a different one");
+				return;
+			}
+			else{
+				System.out.println("order failed");
+				showalert("order Failed");
+
+				return;
+			}
+		}
+		String ParkingResult=client.sendmessage("request parkmyvehicle "+splited[1]);
+		System.out.println(ParkingResult);
+		if(!ParkingResult.equals("accepted"))
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Parking Failed");
+			alert.showAndWait();
+		}
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setContentText("Parking Succesful");
+		alert.showAndWait();
+
+
 
 	}
+	catch(Exception e)
+	{
+		System.out.println("Order failed");
+	}
+			    	Stage stage2 = (Stage) OrderButton .getScene().getWindow();
+		    	stage2.close();
+	return;
+}
+
+public void setAccountID(String rhs)
+{
+	AccountID=rhs;
+}
+public void setClient(ClientClass rhs)
+{
+	client=rhs;
+}
+@FXML
+void initialize() {
+	assert LeaveTimeMinuteBox != null : "fx:id=\"ArrivalTimeMinuteBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert OrderButton != null : "fx:id=\"OrderButton\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert RequestedMallMENU != null : "fx:id=\"RequestedMallMENU\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert LeaveTimeHourBox != null : "fx:id=\"ArrivalTimeHourBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert IDTB != null : "fx:id=\"IDTB\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert LeaveDateBox != null : "fx:id=\"ArrivalDateBox\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert EmailTB != null : "fx:id=\"EmailTB\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert PriceLabel != null : "fx:id=\"PriceLabel\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+	assert CarIDTB != null : "fx:id=\"CarIDTB\" was not injected: check your FXML file 'OneTimeParkingOrderWindow.fxml'.";
+
+}
 }
