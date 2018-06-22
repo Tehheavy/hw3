@@ -16,12 +16,14 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class OneTimeParkingOrderWindowController {
@@ -142,7 +144,11 @@ public class OneTimeParkingOrderWindowController {
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
  }
-    
+    public void showalert(String msg){
+    	Alert alert = new Alert(AlertType.WARNING);
+    	alert.setContentText(msg);
+    	alert.showAndWait();
+    }
 
     @FXML
     void OrderButtonClick(ActionEvent event) {
@@ -154,29 +160,19 @@ public class OneTimeParkingOrderWindowController {
     			EmailTB.getText().isEmpty()||CarIDTB.getText().isEmpty()||IDTB.getText().isEmpty()
     			||ArrivalTimeMinuteBox.getValue().isEmpty()||ArrivalTimeHourBox.getValue().isEmpty()||
     			LeaveTimeMinuteBox.getValue().isEmpty()||LeaveTimeHourBox.getValue().isEmpty()){
-    		try {
-				CreatePopupWindow newpop = new CreatePopupWindow("Not all data filled correctly");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    		showalert("Not all data filled correctly");
     		return; //Alex <3 
     		
     	}
     	if(!isValidEmailAddress(EmailTB.getText())){
-			try {
-				CreatePopupWindow newpop = new CreatePopupWindow("Not all data filled correctly");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			showalert("Not all data filled correctly");
     		return; //Alex <3 
 		}
     	
     	try { //check if ID 's ARE INTEGERS
     	if(IDTB.getText().length()!=9)
     	{
-				CreatePopupWindow newpop = new CreatePopupWindow("IDs are incorrect");
+				showalert("IDs are incorrect");
 				return;
     	}
     	Integer.parseInt(IDTB.getText());
@@ -184,12 +180,7 @@ public class OneTimeParkingOrderWindowController {
 
 		}
     	catch(Exception ex){
-    		try {
-				CreatePopupWindow newpop = new CreatePopupWindow("IDs are incorrect");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+    		showalert("IDs are incorrect");
     		return;
     		
     	}
@@ -201,24 +192,14 @@ public class OneTimeParkingOrderWindowController {
     	LocalTime timeLeave = LocalTime.parse(LeaveTimeHourBox.getValue()+":"+LeaveTimeMinuteBox.getValue());
     	if(ArrivalDate.isAfter(LeaveDate))
     	{
-    		try {
-				CreatePopupWindow newpop = new CreatePopupWindow("Arrival Date is Older than Leave Date!@!");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    		showalert("Arrival Date is Older than Leave Date!@!");
     		return; //Alex <3 
     	}
     	if(ArrivalDate.getYear()==LeaveDate.getYear()&&ArrivalDate.getMonth()==LeaveDate.getMonth()&&
     			ArrivalDate.getDayOfMonth()==LeaveDate.getDayOfMonth()){// IF DAY IS THE SAME CHECK TIME 
     		if(timeArrival.isAfter(timeLeave))
     		{
-    			try {
-    				CreatePopupWindow newpop = new CreatePopupWindow("Arrival Time is Older than Leave Date!@!");
-    			} catch (IOException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
+    			showalert("Arrival Time is Older than Leave Date!@!");
         		return; //Alex <3 
     		}
     	}
@@ -252,17 +233,19 @@ public class OneTimeParkingOrderWindowController {
 			{
 				if(resultA.equals("nospaceorder"))
 				{
-					CreatePopupWindow popup = new CreatePopupWindow("No space in selected mall, please \n try a different one");
+					showalert("No space in selected mall, please \n try a different one");
 					return;
 				}
 				else{
 				System.out.println("order failed");
-				CreatePopupWindow popup = new CreatePopupWindow("order Failed");
+				showalert("order Failed");
 				
 				return;
 				}
 			}
-			CreatePopupWindow popup = new CreatePopupWindow("Order Successful");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Order Succesful");
+			alert.showAndWait();
 			
 			
 

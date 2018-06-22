@@ -41,10 +41,10 @@ public class ParkingOrder {
 	private String RequestMall;
 	private String Email;
 	private String Username;
-	private int price;
+	private float price;
 	private Timestamp arrivetime;
 	private Timestamp leavetime;
-	public ParkingOrder(int id, int personID,int carID, int type, String requestMall, String email, String username, int price,
+	public ParkingOrder(int id, int personID,int carID, int type, String requestMall, String email, String username, float price,
 			Timestamp arrivetime, Timestamp leavetime) {
 		super();
 		this.id = id;

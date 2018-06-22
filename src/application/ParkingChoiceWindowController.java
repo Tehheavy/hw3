@@ -94,7 +94,7 @@ public class ParkingChoiceWindowController {
 				{		
 					items.add((new ParkingOrder(Integer.parseInt(rs[i][0]),Integer.parseInt(rs[i][1]),
 							Integer.parseInt(rs[i][2]),Integer.parseInt(rs[i][3]),rs[i][4],rs[i][5],rs[i][6],
-							Integer.parseInt(rs[i][7]),
+							Float.parseFloat(rs[i][7]),
 							Timestamp.valueOf(rs[i][8]),Timestamp.valueOf(rs[i][9]))));
 				}  	
 				//    	items.add((new ParkingOrder(1,1,1,"weed","email","usrname",5,
@@ -177,7 +177,7 @@ public class ParkingChoiceWindowController {
 				{		
 					items.add((new ParkingOrder(Integer.parseInt(rs[i][0]),Integer.parseInt(rs[i][1]),
 							Integer.parseInt(rs[i][2]),Integer.parseInt(rs[i][3]),rs[i][4],rs[i][5],rs[i][6],
-							Integer.parseInt(rs[i][7]),
+							Float.parseFloat(rs[i][7]),
 							Timestamp.valueOf(rs[i][8]),Timestamp.valueOf(rs[i][9]))));
 				}  	
 				//    	items.add((new ParkingOrder(1,1,1,"weed","email","usrname",5,
@@ -241,9 +241,7 @@ public class ParkingChoiceWindowController {
 			}
 			break;
 		case cancel:
-			System.out.println("very sexy boy");
 			try {
-				//				rs=(String[][])client.sendmessage2("request "+"parking"+" "+AccountID);
 				rs=(String[][])client.sendmessage2("request "+"cancelableorder"+" "+AccountID);
 				if(rs!=null)
 					for(int i=0;i<rs.length;i++){
@@ -259,7 +257,7 @@ public class ParkingChoiceWindowController {
 				{		
 					items.add((new ParkingOrder(Integer.parseInt(rs[i][0]),Integer.parseInt(rs[i][1]),
 							Integer.parseInt(rs[i][2]),Integer.parseInt(rs[i][3]),rs[i][4],rs[i][5],rs[i][6],
-							Integer.parseInt(rs[i][7]),
+							Float.parseFloat(rs[i][7]),
 							Timestamp.valueOf(rs[i][8]),Timestamp.valueOf(rs[i][9]))));
 				}  	
 				//    	items.add((new ParkingOrder(1,1,1,"weed","email","usrname",5,
