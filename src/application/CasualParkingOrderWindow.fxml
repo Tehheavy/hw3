@@ -17,7 +17,6 @@
             <Label text="ID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label text="CarID" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label text="Leave Date" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                  <DatePicker fx:id="LeaveDateBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Leave Time" GridPane.rowIndex="4" />
                   <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
@@ -25,16 +24,23 @@
                      </GridPane.margin>
                   </Label>
                   <Label text="Mail" GridPane.rowIndex="5" />
-                  <TextField fx:id="CarIDTB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="IDTB" GridPane.columnIndex="1" />
-                  <TextField fx:id="EmailTB" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="IDTB" promptText="123456789" GridPane.columnIndex="1">
+                     <tooltip>
+                        <Tooltip text="Enter your 9 digit ID number." />
+                     </tooltip></TextField>
+                  <TextField fx:id="CarIDTB" promptText="1234567" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <tooltip>
+                        <Tooltip text="Enter your car's ID" />
+                     </tooltip></TextField>
                   <ComboBox fx:id="RequestedMallMENU" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="LeaveDateBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <ComboBox fx:id="LeaveTimeHourBox" prefHeight="25.0" prefWidth="57.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <ComboBox fx:id="LeaveTimeMinuteBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="65.0" />
                      </GridPane.margin>
                   </ComboBox>
+                  <TextField fx:id="EmailTB" text="bob@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Requested mall" GridPane.rowIndex="2" />
           </children>
           <columnConstraints>
