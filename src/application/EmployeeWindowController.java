@@ -485,14 +485,20 @@ public class EmployeeWindowController {
 			this.NameMenuBar.setText(rhs);
 	}
 	void load(String acctype){
-		if(acctype.equals("1"))
+		if(acctype.equals("1"))//client
 		{
 			CustomerComplainsMenuItem.setVisible(false);
 			EditMenu.setVisible(false);
 		}
-		if(acctype.equals("2")){
+		if(acctype.equals("2")){//employee
 			//    		VehicleEnterButton.setVisible(false);
 			//    		NameMenuBar.hide();
+			EditMenu.setVisible(false);
+		}
+		if(acctype.equals("3")){//mall master
+			PriceChangesMenuItem.setVisible(false);
+		}
+		if(acctype.equals("4")){//chain manager
 		}
 	}
 }

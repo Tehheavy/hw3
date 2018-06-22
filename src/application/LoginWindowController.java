@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class LoginWindowController {
 	
@@ -82,35 +84,51 @@ public class LoginWindowController {
     			alert.showAndWait();
     			return;
     		}
-
+    		if(recieved.equals("-1"))
+    		{
+    			System.out.println("login failed, recieved: "+ recieved);
+    			//client.CloseConnection(); CHECK THIS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    			Alert alert = new Alert(AlertType.ERROR);
+    			alert.setContentText("User is already online");
+    			alert.showAndWait();
+    			return;
+    		}
     			
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWindow.fxml"));
+    		Parent root = (Parent) loader.load();
+    		EmployeeWindowController CusControl = loader.getController();
+    		CusControl.SetAccountName(LoginID);
+    		CusControl.setClient(client);
+    		CusControl.setAccountID(LoginID);
+    		Stage stage = new Stage();
+    		stage.setScene(new Scene(root));
+    		stage.setTitle(LoginID);
+    		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+    			public void handle(WindowEvent we) {
+    				System.out.println(CusControl.AccountID);
+    				try {
+    					CusControl.client.CloseConnection();
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			}
+    		});        
+    		
     		if(recieved.equals("1")){	
-    			FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWindow.fxml"));
-		    //FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerWindow.fxml"));
-		        Parent root = (Parent) loader.load();
-		     //  CustomerWindowController CusControl = loader.getController();
-		        EmployeeWindowController CusControl = loader.getController();
-		        CusControl.SetAccountName(LoginID);
-		        CusControl.setClient(client);
-		        CusControl.setAccountID(LoginID);
-		        CusControl.load("1");
-		        Stage stage = new Stage();
-		        stage.setScene(new Scene(root));
-		        stage.setTitle(LoginID);
+    			CusControl.load("1");
 		    	stage.show();
     		}
     		else if(recieved.equals("2")){
-    			FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeWindow.fxml"));
-		        Parent root = (Parent) loader.load();
-		        EmployeeWindowController CusControl = loader.getController();
-		        CusControl.SetAccountName(LoginID);
-		        System.out.println("asddassad");
-		        CusControl.setClient(client);
-		        CusControl.setAccountID(LoginID);
 		        CusControl.load("2");
-		        Stage stage = new Stage();
-		        stage.setScene(new Scene(root));
-		        stage.setTitle(LoginID);
+		    	stage.show();
+    		}
+    		else if(recieved.equals("3")){
+		        CusControl.load("3");
+		    	stage.show();
+    		}
+    		else if(recieved.equals("4")){
+		        CusControl.load("4");
 		    	stage.show();
     		}
     	}
