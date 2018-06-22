@@ -40,6 +40,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Show">
               <items>
+                        <MenuItem fx:id="ParkingStatusMenuItem" mnemonicParsing="false" onAction="#ParkingStatusMenuItemClick" text="Parking status" />
                 <MenuItem fx:id="CustomerComplainsMenuItem" mnemonicParsing="false" onAction="#CustomerComplainsMenuItemClick" text="Customer Complaints..." />
                         <MenuItem fx:id="ParkingSpotsMenuItem" mnemonicParsing="false" onAction="#ParkingSpotsMenuItemClick" text="My parking spots" />
                         <MenuItem fx:id="MyComplaintsMenuItem" mnemonicParsing="false" onAction="#MyComplaintsMenuItemClick" text="My Complaints" />

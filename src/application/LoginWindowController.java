@@ -32,7 +32,7 @@ public class LoginWindowController {
 	public ClientClass client;
 	public LoginWindowController() {
 		try {
-			client=new ClientClass("192.168.1.17","4138");
+			client=new ClientClass("192.168.1.128","4138");
 		} catch(Exception e){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Could no reach server, please try again later");
@@ -77,6 +77,9 @@ public class LoginWindowController {
     		{
     			System.out.println("login failed, recieved: "+ recieved);
     			//client.CloseConnection(); CHECK THIS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    			Alert alert = new Alert(AlertType.ERROR);
+    			alert.setContentText("Username or password is incorrect");
+    			alert.showAndWait();
     			return;
     		}
 

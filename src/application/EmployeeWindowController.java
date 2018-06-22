@@ -80,6 +80,8 @@ public class EmployeeWindowController {
 	@FXML // fx:id="MyComplaintsMenuItem"
 	private MenuItem MyComplaintsMenuItem; // Value injected by FXMLLoader
 
+    @FXML // fx:id="ParkingStatusMenuItem"
+    private MenuItem ParkingStatusMenuItem; // Value injected by FXMLLoader
 
 	//ORDER TYPES:1-regular ,2-ONE TIME , 3- 14 DAY ROUTINE , 4 - 28 day FULL TIME
 
@@ -410,8 +412,8 @@ public class EmployeeWindowController {
 			stage.setTitle("Login");
 			Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
 			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(stage2);
 			stage.show();
-			stage2.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -419,25 +421,50 @@ public class EmployeeWindowController {
 
 	}
 
+    @FXML
+    void ParkingStatusMenuItemClick(ActionEvent event) {
+    	try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ParkingStatusWindow.fxml"));
+			Parent root;
+			root = (Parent) loader.load();
+			ParkingStatusWindowController CusControl = loader.getController();
+			CusControl.setClient(client);
+			CusControl.setAccountID(AccountID);
+			CusControl.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.setTitle("Login");
+			Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(stage2);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    @FXML // This method is called by the FXMLLoader when initialization is complete
+    void initialize() {
+        assert ParkingSpotsMenuItem != null : "fx:id=\"ParkingSpotsMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert VehicleLeaveButton != null : "fx:id=\"VehicleLeaveButton\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert ChangeUserMenuItem != null : "fx:id=\"ChangeUserMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert OrderCasualParkingMenuItem != null : "fx:id=\"OrderCasualParkingMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert ParkingStatusMenuItem != null : "fx:id=\"ParkingStatusMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert OrderOneTimeParkingMenuItem != null : "fx:id=\"OrderOneTimeParkingMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert CustomerComplainsMenuItem != null : "fx:id=\"CustomerComplainsMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert ParkingCancelButton != null : "fx:id=\"ParkingCancelButton\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert NameMenuBar != null : "fx:id=\"NameMenuBar\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert EditPricesMenuItem != null : "fx:id=\"EditPricesMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert FileAComplaintMenuItem != null : "fx:id=\"FileAComplaintMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert PriceChangesMenuItem != null : "fx:id=\"PriceChangesMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert MyComplaintsMenuItem != null : "fx:id=\"MyComplaintsMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert VehicleEnterButton != null : "fx:id=\"VehicleEnterButton\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert EditMenu != null : "fx:id=\"EditMenu\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert RoutineSubscriptionMenuItem != null : "fx:id=\"RoutineSubscriptionMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert ExitMenuItem != null : "fx:id=\"ExitMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
+        assert FullTimeSubscriptionMenuItem != null : "fx:id=\"FullTimeSubscriptionMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
 
-	@FXML // This method is called by the FXMLLoader when initialization is complete
-	void initialize() {
-		assert ParkingSpotsMenuItem != null : "fx:id=\"ParkingSpotsMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert VehicleLeaveButton != null : "fx:id=\"VehicleLeaveButton\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert ChangeUserMenuItem != null : "fx:id=\"ChangeUserMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert OrderCasualParkingMenuItem != null : "fx:id=\"OrderCasualParkingMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert OrderOneTimeParkingMenuItem != null : "fx:id=\"OrderOneTimeParkingMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert CustomerComplainsMenuItem != null : "fx:id=\"CustomerComplainsMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert ParkingCancelButton != null : "fx:id=\"ParkingCancelButton\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert NameMenuBar != null : "fx:id=\"NameMenuBar\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert EditPricesMenuItem != null : "fx:id=\"EditPricesMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert FileAComplaintMenuItem != null : "fx:id=\"FileAComplaintMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert VehicleEnterButton != null : "fx:id=\"VehicleEnterButton\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert RoutineSubscriptionMenuItem != null : "fx:id=\"RoutineSubscriptionMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert ExitMenuItem != null : "fx:id=\"ExitMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert FullTimeSubscriptionMenuItem != null : "fx:id=\"FullTimeSubscriptionMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-		assert PriceChangesMenuItem != null : "fx:id=\"PriceChangesMenuItem\" was not injected: check your FXML file 'EmployeeWindow.fxml'.";
-	}
+    }
 	String AccountID;
 	ClientClass client;
 	void setAccountID(String rhs)

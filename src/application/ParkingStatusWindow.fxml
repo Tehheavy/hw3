@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ParkingStatusWindowController">
+   <children>
+      <ComboBox fx:id="MallChoiceComboBox" promptText="&lt;Choose a mall&gt;">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TilePane fx:id="MallSpotsTilePane" tileAlignment="TOP_LEFT" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
