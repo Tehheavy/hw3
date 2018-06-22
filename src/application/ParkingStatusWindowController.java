@@ -83,7 +83,7 @@ public class ParkingStatusWindowController {
 //							MallSpotsTilePane.setPadding(new Insets(10, 10, 10, 10));
 //							MallSpotsTilePane.setVgap(10);
 //							MallSpotsTilePane.setHgap(10);
-							MallSpotsTilePane.setPrefColumns(6);
+							MallSpotsTilePane.setPrefColumns(rs.length/3);
 							System.out.println("rs.length is:"+rs.length);
 							for(int i = 0;i<rs.length;i++){
 								String username = null;
