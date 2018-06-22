@@ -15,10 +15,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.TilePane;
 
@@ -77,9 +79,10 @@ public class ParkingStatusWindowController {
 						System.out.println("rsafter");
 						if(rs!=null){
 							System.out.println("is not null");
-							MallSpotsTilePane.setPadding(new Insets(10, 10, 10, 10));
-							MallSpotsTilePane.setVgap(5);
-							MallSpotsTilePane.setHgap(5);
+							MallSpotsTilePane.getChildren().clear();
+//							MallSpotsTilePane.setPadding(new Insets(10, 10, 10, 10));
+//							MallSpotsTilePane.setVgap(10);
+//							MallSpotsTilePane.setHgap(10);
 							MallSpotsTilePane.setPrefColumns(6);
 							System.out.println("rs.length is:"+rs.length);
 							for(int i = 0;i<rs.length;i++){
@@ -97,7 +100,10 @@ public class ParkingStatusWindowController {
 								if(username!=null&&Carid!=null){
 									Label button = new Label(spot);
 									button.setStyle("-fx-border-color:red; -fx-background-color: yellow;");
-									button.setPadding(new Insets(10,10,10,10));
+//									button.setPadding(new Insets(10,10,10,10));
+									button.setPrefSize(30, 30);
+									button.setTooltip(new Tooltip((username==null)?"free spot":username));
+									button.setAlignment(Pos.BASELINE_CENTER);
 									
 									MallSpotsTilePane.getChildren().add(button);
 									System.out.println("test");
@@ -105,8 +111,10 @@ public class ParkingStatusWindowController {
 								else{
 									Label button = new Label(spot);
 									button.setStyle("-fx-border-color:red; -fx-background-color: green;");
-									button.setPadding(new Insets(10,10,10,10));
-									
+//									button.setPadding(new Insets(10,10,10,10));
+									button.setPrefSize(30, 30);
+									button.setTooltip(new Tooltip((username==null)?"free spot":username));
+									button.setAlignment(Pos.BASELINE_CENTER);
 									MallSpotsTilePane.getChildren().add(button);
 									System.out.println("test");
 								}
