@@ -16,7 +16,7 @@
         <TextField fx:id="UsernameTB" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
             <PasswordField fx:id="PasswordTF" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
         <Label text="Parking system" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <Button fx:id="RegisterButton" mnemonicParsing="false" onAction="#RegisterClick" text="Sign in" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <Button fx:id="RegisterButton" mnemonicParsing="false" onAction="#RegisterClick" text="Register" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
           <GridPane.margin>
             <Insets />
           </GridPane.margin>

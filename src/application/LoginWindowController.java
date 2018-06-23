@@ -30,11 +30,24 @@ import javafx.stage.WindowEvent;
 
 public class LoginWindowController {
 	
-
+	public String ip;
 	public ClientClass client;
 	public LoginWindowController() {
+//		try {
+//			client=new ClientClass("192.168.1.17","4138");
+//		} catch(Exception e){
+//			Alert alert = new Alert(AlertType.ERROR);
+//			alert.setContentText("Could no reach server, please try again later");
+//			alert.showAndWait();
+//			Platform.exit();
+//			System.out.println("Could Not Connect to server");
+//		}
+	}
+	public void load(String str){
+		ip=str;
 		try {
-			client=new ClientClass("192.168.1.128","4138");
+			client=new ClientClass(str,"4138");
+			System.out.println("in load");
 		} catch(Exception e){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Could no reach server, please try again later");
@@ -43,6 +56,7 @@ public class LoginWindowController {
 			System.out.println("Could Not Connect to server");
 		}
 	}
+	
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -100,6 +114,7 @@ public class LoginWindowController {
     		CusControl.SetAccountName(LoginID);
     		CusControl.setClient(client);
     		CusControl.setAccountID(LoginID);
+    		CusControl.ip=ip;
     		Stage stage = new Stage();
     		stage.setScene(new Scene(root));
     		stage.setTitle(LoginID);

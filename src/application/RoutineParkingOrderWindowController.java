@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class RoutineParkingOrderWindowController {
@@ -119,29 +122,25 @@ public class RoutineParkingOrderWindowController {
 				EmailTB.getText().isEmpty()||CarIDTB.getText().isEmpty()||IDTB.getText().isEmpty()
 				||ArrivalTimeMinuteBox.getValue().isEmpty()||ArrivalTimeHourBox.getValue().isEmpty()
 				){
-			try {
-				CreatePopupWindow newpop = new CreatePopupWindow("Not all data filled correctly");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Not all data filled correctly");
+			alert.showAndWait();
 			return; //Alex <3 
 
 		}
 		if(!isValidEmailAddress(EmailTB.getText())){
-			try {
-				CreatePopupWindow newpop = new CreatePopupWindow("Not all data filled correctly");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Not all data filled correctly");
+			alert.showAndWait();
 			return; //Alex <3 
 		}
 
 		try { //check if ID 's ARE INTEGERS
 			if(IDTB.getText().length()!=9)
 			{
-				CreatePopupWindow newpop = new CreatePopupWindow("IDs are incorrect");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText("IDs are incorrect");
+				alert.showAndWait();
 				return;
 			}
 			Integer.parseInt(IDTB.getText());
@@ -149,12 +148,9 @@ public class RoutineParkingOrderWindowController {
 
 		}
 		catch(Exception ex){
-			try {
-				CreatePopupWindow newpop = new CreatePopupWindow("IDs are incorrect");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("IDs are incorrect");
+			alert.showAndWait();
 			return;
 
 		}
@@ -163,6 +159,16 @@ public class RoutineParkingOrderWindowController {
 
 		LocalDate ArrivalDate= ArrivalDateBox.getValue();
 		LocalDate LeaveDate = ArrivalDate.plusDays(14);
+		LocalTime timeArrival = LocalTime.parse(ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue());
+		LocalDateTime testArrive=LocalDateTime.parse(ArrivalDate.toString()+"T"+timeArrival.toString());
+    	LocalDateTime curr= LocalDateTime.now();
+		if(testArrive.isBefore(curr)){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("one or more of the dates is before current time");
+			alert.showAndWait();
+			return;
+			
+		}
 		System.out.println("order "+"3 "+AccountID+" "+IDTB.getText()+" "+CarIDTB.getText()+
 				" "+ArrivalDateBox.getValue().toString()+" "+
 				ArrivalTimeHourBox.getValue()+":"+ArrivalTimeMinuteBox.getValue()+" "+
@@ -184,13 +190,16 @@ public class RoutineParkingOrderWindowController {
 							EmailTB.getText()+" "+String.valueOf(price)).equals("acceptedorder"))
 					{
 						System.out.println("order failed");
-						CreatePopupWindow popup = new CreatePopupWindow("order Failed");
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setContentText("order Failed");
+						alert.showAndWait();
 						
 						return;
 					}
-					CreatePopupWindow popup = new CreatePopupWindow("Order Successful");
 					
-					
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setContentText("Order Successful");
+					alert.showAndWait();
 		
 				}
 				catch(Exception e)

@@ -206,6 +206,14 @@ public class OneTimeParkingOrderWindowController {
     	
     	LocalDateTime testArrive=LocalDateTime.parse(ArrivalDate.toString()+"T"+timeArrival.toString());
     	LocalDateTime testLeave=LocalDateTime.parse(LeaveDate.toString()+"T"+timeLeave.toString());
+    	LocalDateTime curr= LocalDateTime.now();
+    			if(testLeave.isBefore(curr)||testArrive.isBefore(curr)){
+    				Alert alert = new Alert(AlertType.INFORMATION);
+    				alert.setContentText("one or more of the dates is before current time");
+    				alert.showAndWait();
+    				return;
+    				
+    			}
     	Timestamp timearrive= Timestamp.valueOf(testArrive);
     	System.out.println(testArrive.toString());
     	System.out.println(testLeave.toString());

@@ -23,6 +23,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class EmployeeWindowController {
+	
+	public String ip;
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
 
@@ -371,7 +373,7 @@ public class EmployeeWindowController {
 			stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
 	}
 	@FXML
@@ -388,6 +390,8 @@ public class EmployeeWindowController {
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.setTitle("Login");
+			CusControl.load(ip);
+			client.CloseConnection();
 			Stage stage2 = (Stage) VehicleEnterButton.getScene().getWindow();
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.show();

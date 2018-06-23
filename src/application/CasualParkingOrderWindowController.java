@@ -141,19 +141,18 @@ public class CasualParkingOrderWindowController {
 
 		}
 		if(!isValidEmailAddress(EmailTB.getText())){
-			try {
-				CreatePopupWindow newpop = new CreatePopupWindow("Not all data filled correctly");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Not all data filled correctly");
+			alert.showAndWait();
 			return; //Alex <3 
 		}
 
 		try { //check if ID 's ARE INTEGERS
 			if(IDTB.getText().length()!=9)
 			{
-				CreatePopupWindow newpop = new CreatePopupWindow("IDs are incorrect");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText("IDs are incorrect");
+				alert.showAndWait();
 				return;
 			}
 			Integer.parseInt(IDTB.getText());
@@ -161,12 +160,9 @@ public class CasualParkingOrderWindowController {
 
 		}
 		catch(Exception ex){
-			try {
-				CreatePopupWindow newpop = new CreatePopupWindow("IDs are incorrect");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("IDs are incorrect");
+			alert.showAndWait();
 			return;
 
 		}
@@ -195,6 +191,14 @@ public class CasualParkingOrderWindowController {
 		System.out.println(testLeave.toString());
 		long hours=curr.until(testLeave, ChronoUnit.HOURS);
 		System.out.println("Total price is : "+hours*price+" = "+hours+" hours * "+price+"ILS");
+		//LocalDateTime curr= LocalDateTime.now();
+		if(testLeave.isBefore(curr)){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("Leave Date is before current time");
+			alert.showAndWait();
+			return;
+			
+		}
 		float priceTotal=hours*price;
 
 		//LocalDate LeaveDate = ArrivalDate.plusDays(28);

@@ -104,6 +104,9 @@ public class ParkingChoiceWindowController {
 					@Override
 					public void handle(MouseEvent click) {
 						ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
+						if(currentItemSelected==null)						
+							return;				
+						
 						if (click.getClickCount() == 2) {
 							//Use ListView's getSelected Item
 							System.out.println(currentItemSelected);
@@ -186,9 +189,12 @@ public class ParkingChoiceWindowController {
 				ParkingChoicesListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent click) {
+						
 						if (click.getClickCount() == 2) {
 							//Use ListView's getSelected Item
 							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
+							if(currentItemSelected==null)						
+								return;	
 							System.out.println(currentItemSelected);
 							Timestamp time1=currentItemSelected.getArrivetime();
 							Timestamp time2=currentItemSelected.getLeavetime();
@@ -269,6 +275,8 @@ public class ParkingChoiceWindowController {
 						if (click.getClickCount() == 2) {
 							//Use ListView's getSelected Item
 							ParkingOrder currentItemSelected = ParkingChoicesListView.getSelectionModel().getSelectedItem();
+							if(currentItemSelected==null)						
+								return;	
 							System.out.println(currentItemSelected);
 							Timestamp time1=currentItemSelected.getArrivetime();
 							Timestamp time2=currentItemSelected.getLeavetime();
@@ -288,7 +296,7 @@ public class ParkingChoiceWindowController {
 									if(hours>3)
 									{
 										System.out.println("90% off");
-										alert.setContentText("Your order has been canceled nin, total price is:"+Float.parseFloat(res)*0.1);
+										alert.setContentText("Your order has been canceled, total price is:"+Float.parseFloat(res)*0.1);
 									}
 									else if(hours<=3&&hours>1)
 									{
