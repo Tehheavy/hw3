@@ -13,15 +13,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.TilePane;
 
 public class ParkingStatusWindowController {
@@ -80,40 +85,97 @@ public class ParkingStatusWindowController {
 						if(rs!=null){
 							System.out.println("is not null");
 							MallSpotsTilePane.getChildren().clear();
-//							MallSpotsTilePane.setPadding(new Insets(10, 10, 10, 10));
-//							MallSpotsTilePane.setVgap(10);
-//							MallSpotsTilePane.setHgap(10);
 							MallSpotsTilePane.setPrefColumns(rs.length/3);
 							System.out.println("rs.length is:"+rs.length);
 							for(int i = 0;i<rs.length;i++){
 								String username = null;
 								String Carid = null;
 								String spot=null;
+								String isbroken =null;
 								for(int j=0;j<rs[i].length;j++){
 									System.out.println("rs[i].length is:"+rs[i].length);
 									//user,car,spot is the array vuels
 									username=rs[i][0];
 									Carid=rs[i][1];
 									spot=rs[i][2];
+									isbroken=rs[i][3];
 									
 								}
+							    // Create ContextMenu
+						        ContextMenu contextMenu = new ContextMenu();
+						        Label button = new Label(spot);
+						        final String spotfinal = spot;
+						        final MenuItem item1 = new MenuItem("Set as broken");
+						        final MenuItem item2 = new MenuItem("Set as not broken");
+						        item1.setOnAction(event -> {
+						        	System.out.println(spotfinal+" "+mallname);
+						        	try {
+										client.sendmessage("request setbroken "+spotfinal+" "+mallname);
+										button.setStyle("-fx-border-color:red; -fx-background-color: red;");
+										button.getTooltip().setText("broken");
+										button.getContextMenu().getItems().clear();
+										button.getContextMenu().getItems().add(item2);
+									} catch (ClassNotFoundException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+					            });
+						        item2.setOnAction(event -> {
+						        	System.out.println(spotfinal+" "+mallname);
+						        	try {
+										client.sendmessage("request setnotbroken "+spotfinal+" "+mallname);
+										button.setStyle("-fx-border-color:red; -fx-background-color: green;");
+										button.getTooltip().setText("free");
+										button.getContextMenu().getItems().clear();
+										button.getContextMenu().getItems().add(item1);
+									} catch (ClassNotFoundException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+					            });
+						        
 								if(username!=null&&Carid!=null){
-									Label button = new Label(spot);
 									button.setStyle("-fx-border-color:red; -fx-background-color: yellow;");
 //									button.setPadding(new Insets(10,10,10,10));
 									button.setPrefSize(30, 30);
 									button.setTooltip(new Tooltip((username==null)?"free spot":username));
 									button.setAlignment(Pos.BASELINE_CENTER);
-									
 									MallSpotsTilePane.getChildren().add(button);
 									System.out.println("test");
 								}
-								else{
-									Label button = new Label(spot);
+								else if(isbroken.equals("0")){
+									contextMenu.getItems().add(item1);
+									button.setContextMenu(contextMenu);
 									button.setStyle("-fx-border-color:red; -fx-background-color: green;");
 //									button.setPadding(new Insets(10,10,10,10));
 									button.setPrefSize(30, 30);
 									button.setTooltip(new Tooltip((username==null)?"free spot":username));
+									button.setAlignment(Pos.BASELINE_CENTER);
+									button.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+										 
+							            @Override
+							            public void handle(ContextMenuEvent event) {
+							 
+							                contextMenu.show(button, event.getScreenX(), event.getScreenY());
+							            }
+							        });
+									MallSpotsTilePane.getChildren().add(button);
+									System.out.println("test");
+								}
+								else if(isbroken.equals("1")){
+									contextMenu.getItems().add(item2);
+
+									button.setContextMenu(contextMenu);
+									button.setStyle("-fx-border-color:red; -fx-background-color: red;");
+//									button.setPadding(new Insets(10,10,10,10));
+									button.setPrefSize(30, 30);
+									button.setTooltip(new Tooltip((username==null)?"broken":username));
 									button.setAlignment(Pos.BASELINE_CENTER);
 									MallSpotsTilePane.getChildren().add(button);
 									System.out.println("test");

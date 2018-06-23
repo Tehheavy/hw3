@@ -30,7 +30,7 @@ public class Main extends Application {
 			stage.setScene(new Scene(root));
 			if(getParameters().getRaw().isEmpty()){
 				System.out.println("argument is null");
-				CusControl.load("192.168.1.17");
+				CusControl.load("192.168.1.128");
 			}
 			else{
 				CusControl.load(getParameters().getRaw().get(0));
