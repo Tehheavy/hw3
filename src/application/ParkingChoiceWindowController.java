@@ -111,8 +111,17 @@ public class ParkingChoiceWindowController {
 							//Use ListView's getSelected Item
 							System.out.println(currentItemSelected);
 							try {
-								if(currentItemSelected.getType()!=3&&currentItemSelected.getType()!=4)
-									System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())));
+								if(currentItemSelected.getType()!=3&&currentItemSelected.getType()!=4){
+									String res = client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId()));
+//									System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())));
+									if(res.equals("declined")){
+										Alert alert = new Alert(AlertType.ERROR);
+										alert.setTitle("Parking Error");
+										alert.setHeaderText("Error");
+										alert.setContentText("Either there is no space or an error has occured.");
+										alert.showAndWait();
+									}
+								}
 								else{
 									if( mallchoiceComboBox.getSelectionModel().isEmpty()){
 										Alert alert = new Alert(AlertType.WARNING);
@@ -125,8 +134,17 @@ public class ParkingChoiceWindowController {
 									}
 									else{
 										System.out.println("nice, u select da mall:" + mallchoiceComboBox.getSelectionModel().getSelectedItem().toString());
-										System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())
-										+" "+ mallchoiceComboBox.getSelectionModel().getSelectedItem().toString()));
+//										System.out.println(client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())
+//										+" "+ mallchoiceComboBox.getSelectionModel().getSelectedItem().toString()));
+										String res = client.sendmessage("request parkmyvehicle "+Integer.toString(currentItemSelected.getId())
+										+" "+ mallchoiceComboBox.getSelectionModel().getSelectedItem().toString());
+										if(res.equals("declined")){
+											Alert alert = new Alert(AlertType.ERROR);
+											alert.setTitle("Parking Error");
+											alert.setHeaderText("Error");
+											alert.setContentText("Either there is no space or an error has occured.");
+											alert.showAndWait();
+										}
 									}
 								}
 							} catch (ClassNotFoundException e) {

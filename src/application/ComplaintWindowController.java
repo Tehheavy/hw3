@@ -53,6 +53,7 @@ public class ComplaintWindowController {
         assert chooseComplaintMenuButton != null : "fx:id=\"chooseComplaintMenuButton\" was not injected: check your FXML file 'CompaintWindow.fxml'.";
         assert ComplaintText != null : "fx:id=\"ComplaintText\" was not injected: check your FXML file 'CompaintWindow.fxml'.";
         assert SendComplaintButton != null : "fx:id=\"SendComplaintButton\" was not injected: check your FXML file 'CompaintWindow.fxml'.";
+        chooseComplaintMenuButton.setVisible(false);
 
     }
     String AccountID;

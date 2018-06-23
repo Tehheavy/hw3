@@ -69,14 +69,15 @@ public class ParkingOrder {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	public enum ordertype{dummy,Casual,OneTime,RoutineSubscription,FullTimeSubscription};
 	@Override
 	public String toString() {
-		return "ParkingOrder [id=" + id + ", PersonID=" + PersonID + ", carID="+ carID +", type=" + type + ", "
+		return " id=" + id + ", PersonID=" + PersonID + ", carID="+ carID +", type=" + ordertype.values()[type].toString() + ", "
 				+ (RequestMall != null ? "RequestMall=" + RequestMall + ", " : "")
 				+ (Email != null ? "Email=" + Email + ", " : "")
 				+ (Username != null ? "Username=" + Username + ", " : "") + "price=" + price + ", "
 				+ (arrivetime != null ? "arrivetime=" + arrivetime + ", " : "")
-				+ (leavetime != null ? "leavetime=" + leavetime : "") + "]";
+				+ (leavetime != null ? "leavetime=" + leavetime : "") + "";
 //		return "gimme crack daddy";
 	}
 	
