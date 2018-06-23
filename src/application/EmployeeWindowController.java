@@ -494,16 +494,18 @@ public class EmployeeWindowController {
 			this.NameMenuBar.setText(rhs);
 	}
 	void load(String acctype){
-		//String[i]=id,leavetime,arrivetime,mall,price
+		//String[i]=id,arrivetime,leavetime,mall,price
 		try {
 			int totalorders=0;
 			int totalparked=0;
+			String subbeduntil="";
 			Boolean isfulltimesubscribed=false;
 			ArrayList<String> l = new ArrayList<String>();
 			String[][] orderinfo = client.sendmessage2("request myorders "+AccountID);
 			for(int i=0;i<orderinfo.length;i++){
 				if(orderinfo[i][3]==null){
 					isfulltimesubscribed=true;
+					subbeduntil=orderinfo[i][2];
 					continue;
 				}
 				totalorders++;
@@ -517,7 +519,8 @@ public class EmployeeWindowController {
 			infoLabel.setText("You have \""+totalorders+"\" total orders\n\n"
 					+ "You have parked in "+totalparked+" of them\n\n"
 							+ "The parked cars are:"+l+"\n\n"
-									+ "And currently you are "+(isfulltimesubscribed ? "Subscribed to our service" : "Not Subscribed"));
+									+ "And currently you are "+(isfulltimesubscribed ? "Subscribed to our service"
+											+ " until "+subbeduntil : "Not Subscribed"));
 			infoLabel.autosize();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
