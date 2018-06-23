@@ -28,7 +28,14 @@ public class Main extends Application {
 			LoginWindowController CusControl = loader.getController();
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
-			CusControl.load(getParameters().getRaw().get(0));
+			if(getParameters().getRaw().isEmpty()){
+				System.out.println("argument is null");
+				CusControl.load("192.168.1.17");
+			}
+			else{
+				CusControl.load(getParameters().getRaw().get(0));
+			}
+
 			stage.setTitle("Login");
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.show();
