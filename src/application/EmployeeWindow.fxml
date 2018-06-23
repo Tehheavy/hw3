@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
@@ -72,7 +73,7 @@
                         <Button fx:id="ParkingCancelButton" mnemonicParsing="false" onAction="#ParkingCancelMethod" text="Cancel Parking" />
                      </children>
                   </VBox>
-                  <Label prefHeight="61.0" prefWidth="192.0" text="ADD CUR STORED VEHICLES THEIR TIME AND STUFF HER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label fx:id="infoLabel" prefWidth="192.0" text="ADD CUR STORED VEHICLES THEIR TIME AND STUFF HER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
           </GridPane>
          </children>

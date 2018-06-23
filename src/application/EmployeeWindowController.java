@@ -6,6 +6,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.ParkingChoiceWindowController.modes;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
@@ -85,6 +87,9 @@ public class EmployeeWindowController {
     @FXML // fx:id="ParkingStatusMenuItem"
     private MenuItem ParkingStatusMenuItem; // Value injected by FXMLLoader
 
+
+    @FXML // fx:id="infoLabel"
+    private Label infoLabel; // Value injected by FXMLLoade
 	//ORDER TYPES:1-regular ,2-ONE TIME , 3- 14 DAY ROUTINE , 4 - 28 day FULL TIME
 
 	@FXML
@@ -489,6 +494,38 @@ public class EmployeeWindowController {
 			this.NameMenuBar.setText(rhs);
 	}
 	void load(String acctype){
+		//String[i]=id,leavetime,arrivetime,mall,price
+		try {
+			int totalorders=0;
+			int totalparked=0;
+			Boolean isfulltimesubscribed=false;
+			ArrayList<String> l = new ArrayList<String>();
+			String[][] orderinfo = client.sendmessage2("request myorders "+AccountID);
+			for(int i=0;i<orderinfo.length;i++){
+				if(orderinfo[i][3]==null){
+					isfulltimesubscribed=true;
+					continue;
+				}
+				totalorders++;
+			}
+			orderinfo = client.sendmessage2("request parkedcars "+AccountID);
+			//,String[i]=id,personid,carid,type,mall,email,username,price,arrivetime,leavetime,
+			for(int i=0;i<orderinfo.length;i++){
+				totalparked++;
+				l.add(orderinfo[i][2]);
+			}
+			infoLabel.setText("You have \""+totalorders+"\" total orders\n\n"
+					+ "You have parked in "+totalparked+" of them\n\n"
+							+ "The parked cars are:"+l+"\n\n"
+									+ "And currently you are "+(isfulltimesubscribed ? "Subscribed to our service" : "Not Subscribed"));
+			infoLabel.autosize();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(acctype.equals("1"))//client
 		{
 			CustomerComplainsMenuItem.setVisible(false);
